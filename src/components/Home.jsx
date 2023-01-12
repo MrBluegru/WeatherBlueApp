@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import Constants from "expo-constants";
 import Card from "./Card";
+import { API_KEY } from "@env";
 
 const Home = () => {
   const [city, onChangeCity] = useState("");
@@ -34,32 +35,42 @@ const Home = () => {
       logitude: data.coord.lon,
       latitude: data.coord.lat,
     };
-    console.log(cityS);
     onChangeCities((oldCities) => [...oldCities, cityS]);
-    // return city;
+    onChangeCity("");
   };
 
   return (
-    <View style={styles.search}>
-      <TextInput
-        value={city}
-        placeholder="city"
-        style={styles.textInput}
-        onChangeText={onChangeCity}
-      />
-      <Button title="Search" onPress={onSearch} />
-      <FlatList
-        data={cities}
-        ItemSeparatorComponent={() => <Text> ---- </Text>}
-        renderItem={({ item: city }) => <Card {...city} />}
-      />
+    <View style={styles.allView}>
+      <View style={styles.search}>
+        <TextInput
+          value={city}
+          placeholder="city"
+          style={styles.textInput}
+          onChangeText={onChangeCity}
+        />
+        <Button title="🔎" onPress={onSearch} />
+      </View>
+      <View style={styles.citiesL}>
+        <FlatList
+          data={cities}
+          ItemSeparatorComponent={() => <Text> </Text>}
+          renderItem={({ item: city }) => <Card {...city} />}
+        />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  search: {
+  allView: {
+    flex: 1,
     paddingTop: Constants.statusBarHeight,
+    marginHorizontal: 20,
+  },
+  search: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   textInput: {
     borderRadius: 5,
@@ -68,6 +79,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     marginBotton: 10,
+    marginVertical: 10,
+    marginHorizontal: 15,
+    width: "80%",
+  },
+  citiesL: {
+    flex: 1,
   },
 });
 

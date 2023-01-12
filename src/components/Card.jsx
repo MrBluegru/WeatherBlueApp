@@ -13,13 +13,16 @@ const Card = (props) => {
         />
       </View>
       <View>
-        <Text>{props.name}</Text>
-        <Text>Clouds: {props.clouds}</Text>
-        <Text>Lat-Long: {props.latitude} - {props.logitude}</Text>
-        <Text>Temperature Current: {props.temp}</Text>
-        <Text>Temperature Max: {props.max}</Text>
-        <Text>Temperature Min: {props.min}</Text>
+        <Text style={styles.title}>
+          {props.name} {props.temp}°
+        </Text>
         <Text>Weather: {props.weather}</Text>
+        <Text>Temperature</Text>
+        <View style={{ flexDirection: "row" }}>
+          <Text>Min: {props.min}</Text>
+          <Text> Max: {props.max}</Text>
+        </View>
+        <Text>Clouds: {props.clouds}</Text>
         <Text>Wind: {props.wind}</Text>
       </View>
     </View>
@@ -29,14 +32,21 @@ const Card = (props) => {
 const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: "#999",
+    marginVertical: 10,
+    marginHorizontal: 10,
   },
   icon: {
-    width: 150,
-    height: 150,
+    width: 140,
+    height: 140,
   },
   title: {
-    
-  }
+    marginVertical: 4,
+    fontSize: 15,
+    fontWeight: "bold",
+  },
 });
 
 export default Card;
