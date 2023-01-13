@@ -17,7 +17,7 @@ const Card = (props) => {
           {props.name} {props.temp}°
         </Text>
         <Text>Weather: {props.weather}</Text>
-        <Text>Temperature</Text>
+        <Text style={styles.title}>Temperature</Text>
         <View style={{ flexDirection: "row" }}>
           <Text>Min: {props.min}</Text>
           <Text> Max: {props.max}</Text>

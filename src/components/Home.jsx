@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   View,
@@ -7,6 +7,7 @@ import {
   Button,
   FlatList,
   Alert,
+  TouchableOpacity,
 } from "react-native";
 import Constants from "expo-constants";
 import Card from "./Card";
@@ -15,7 +16,6 @@ import { API_KEY } from "@env";
 const Home = () => {
   const [city, onChangeCity] = useState("");
   const [cities, onChangeCities] = useState([]);
-
   const onSearch = async () => {
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city},&appid=${API_KEY}&units=metric`
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   allView: {
     flex: 1,
     paddingTop: Constants.statusBarHeight,
-    marginHorizontal: 20,
+    marginHorizontal: 10,
   },
   search: {
     flexDirection: "row",
