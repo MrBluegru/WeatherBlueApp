@@ -48,7 +48,7 @@ const MyTabs = () => {
         options={{
           tabBarLabel: "Favorites",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="star" color={'yellow'} size={30} />
+            <FontAwesome name="star" color={color} size={30} />
           ),
           // tabBarBadge: 134,
           headerShown: true,

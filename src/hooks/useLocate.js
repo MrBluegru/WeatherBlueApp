@@ -20,7 +20,7 @@ const useLocate = () => {
     locate();
   }, []);
 
-  return { location: location };
+  return { location };
 };
 
 export default useLocate;
