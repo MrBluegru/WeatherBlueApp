@@ -1,14 +1,14 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 
-const Home = () => {
+const Favorites = () => {
   return (
-    <View style={{ marginTop: 30 }}>
-      <Text>Hi from HomeScreen</Text>
+    <View>
+      <Text>Hi from your Favorites</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({});
 
-export default Home;
+export default Favorites;
