@@ -8,7 +8,15 @@ export const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginBottom: 10,
     padding: 8,
-    backgroundColor: "green",
     borderRadius: 4,
+  },
+  containerMap: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  mapView: {
+    flex: 1,
+    height: 220,
+    width: 350,
   },
 });
