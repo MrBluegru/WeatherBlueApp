@@ -1,3 +1,5 @@
-export const colorByTemp = (temp) => {
+const colorByTemp = (temp) => {
   return temp > 25 ? "#ffc300" : "green";
 };
+
+export default colorByTemp;

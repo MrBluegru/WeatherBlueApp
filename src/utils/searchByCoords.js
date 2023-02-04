@@ -1,5 +1,5 @@
 import { API_KEY } from "@env";
-export const searchCurrentCity = async (lat, lon) => {
+const searchCurrentCity = async (lat, lon) => {
   const response = await fetch(
     `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`
   );
@@ -26,13 +26,15 @@ export const searchCurrentCity = async (lat, lon) => {
         clouds: data.clouds.all,
         timeDataUnix: data.dt,
         sunrise: data.sys.sunrise,
-        sunset: data.sys.sunrise,
+        sunset: data.sys.sunset,
       };
       return city;
     } else {
-      console.log("Error");
+      console.log("Error getting data");
     }
   } catch (error) {
     console.log(error);
   }
 };
+
+export default searchCurrentCity;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, ScrollView, Button, Image } from "react-native";
-import { searchCurrentCity } from "../../utils/searchByCoords";
-import { colorByTemp } from "../../utils/colorsTemp";
+import searchCurrentCity from "../../utils/searchByCoords";
+import colorByTemp from "../../utils/colorsTemp";
 import { styles } from "../../styles/home.Styles";
 import useLocate from "../../hooks/useLocate";
 import MapView from "react-native-maps";
