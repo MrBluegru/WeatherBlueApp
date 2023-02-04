@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Text, View, TextInput, Button, FlatList } from "react-native";
-import { styles } from "../styles/searchCities.Styles";
+import { styles } from "../../styles/searchCities.Styles";
 import { API_KEY } from "@env";
 import Card from "./Card";
 

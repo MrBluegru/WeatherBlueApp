@@ -16,8 +16,6 @@ export const searchCurrentCity = async (lat, lon) => {
         tempMax: data.main.temp_max,
         img: data.weather[0].icon,
         humidity: data.main.humidity,
-        logitude: data.coord.lon,
-        latitude: data.coord.lat,
         pressure: data.main.pressure,
         seaLevel: data.main.sea_level,
         grndLevel: data.main.grnd_level,

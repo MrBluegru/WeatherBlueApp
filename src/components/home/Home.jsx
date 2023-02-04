@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, ScrollView, Button } from "react-native";
-import { searchCurrentCity } from "../utils/searchByCoords";
-import { styles } from "../styles/home.Styles";
-import useLocate from "../hooks/useLocate";
+import { View, Text, ScrollView, Button, Image } from "react-native";
+import { searchCurrentCity } from "../../utils/searchByCoords";
+import { colorByTemp } from "../../utils/colorsTemp";
+import { styles } from "../../styles/home.Styles";
+import useLocate from "../../hooks/useLocate";
 import MapView from "react-native-maps";
-import { colorByTemp } from "../utils/colorsTemp";
+import CardH from "./CardH";
 
 const Home = () => {
   const { location } = useLocate();
@@ -58,14 +59,19 @@ const Home = () => {
           ]}
         >
           <ScrollView>
-            <Text>{JSON.stringify(dataCity)}</Text>
-            <View style={styles.containerMap}>
+            <CardH {...dataCity} />
+            <View style={styles.containerCenter}>
               {coordsCity !== null ? map() : null}
             </View>
           </ScrollView>
         </View>
       ) : (
-        <Text>"Loading...."</Text>
+        <View style={styles.containerCenter}>
+          <Image
+            style={styles.icon}
+            source={require("../../img/loading.gif")}
+          />
+        </View>
       )}
     </>
   );

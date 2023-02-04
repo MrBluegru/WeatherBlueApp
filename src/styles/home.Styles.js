@@ -10,13 +10,18 @@ export const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 4,
   },
-  containerMap: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
   mapView: {
     flex: 1,
     height: 220,
     width: 350,
+  },
+  containerCenter: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  icon: {
+    width: '100%',
+    height: '100%',
   },
 });
