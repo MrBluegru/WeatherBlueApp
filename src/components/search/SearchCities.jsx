@@ -5,8 +5,8 @@ import { API_KEY } from "@env";
 import Card from "./Card";
 
 const SearchCities = () => {
-  const [city, onChangeCity] = useState("");
-  const [cities, onChangeCities] = useState([]);
+  const [city, setCity] = useState("");
+  const [cities, setChangeCities] = useState([]);
   const onSearch = async () => {
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city},&appid=${API_KEY}&units=metric`
@@ -14,40 +14,53 @@ const SearchCities = () => {
     const data = await response.json();
 
     const cityS = {
-      min: data.main.temp_min,
-      max: data.main.temp_max,
-      img: data.weather[0].icon,
       id: data.id,
-      wind: data.wind.speed,
-      temp: data.main.temp,
       name: data.name,
-      weather: data.weather[0].main,
+      weather: data.weather[0].description,
+      feelsLike: data.main.feels_like,
+      temp: data.main.temp,
+      tempMin: data.main.temp_min,
+      tempMax: data.main.temp_max,
+      img: data.weather[0].icon,
+      humidity: data.main.humidity,
+      pressure: data.main.pressure,
+      seaLevel: data.main.sea_level,
+      grndLevel: data.main.grnd_level,
+      visibility: data.visibility,
+      windSpeed: data.wind.speed,
+      windDeg: data.wind.deg,
+      windGust: data.wind.gust,
       clouds: data.clouds.all,
-      logitude: data.coord.lon,
-      latitude: data.coord.lat,
+      timeDataUnix: data.dt,
+      sunrise: data.sys.sunrise,
+      sunset: data.sys.sunset,
     };
-    onChangeCities((oldCities) => [...oldCities, cityS]);
-    onChangeCity("");
+    setChangeCities((oldCities) => [...oldCities, cityS]);
+    setCity("");
   };
-
   return (
     <View style={styles.allView}>
-      <View style={styles.search}>
+      <View
+        style={cities.length ? styles.search : [styles.search, { flex: 1 }]}
+      >
         <TextInput
           value={city}
           placeholder="city"
+          onChangeText={setCity}
+          onSubmitEditing={onSearch}
           style={styles.textInput}
-          onChangeText={onChangeCity}
         />
-        <Button title="🔎" onPress={onSearch} />
+        {/* <Button title="🔎" onPress={onSearch} /> */}
       </View>
-      <View style={styles.citiesL}>
-        <FlatList
-          data={cities}
-          ItemSeparatorComponent={() => <Text> </Text>}
-          renderItem={({ item: city }) => <Card {...city} />}
-        />
-      </View>
+      {cities.length ? (
+        <View style={styles.citiesL}>
+          <FlatList
+            data={cities}
+            ItemSeparatorComponent={() => <Text> </Text>}
+            renderItem={({ item: city }) => <Card {...city} />}
+          />
+        </View>
+      ) : null}
     </View>
   );
 };
