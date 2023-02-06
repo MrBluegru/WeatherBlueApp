@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text, View, TextInput, Button, FlatList } from "react-native";
 import { styles } from "../../styles/searchCities.Styles";
 import { API_KEY } from "@env";
-import Card from "./Card";
+import MinimalCard from "../card/MinimalCard";
 
 const SearchCities = () => {
   const [city, setCity] = useState("");
@@ -34,6 +34,8 @@ const SearchCities = () => {
       timeDataUnix: data.dt,
       sunrise: data.sys.sunrise,
       sunset: data.sys.sunset,
+      lat: data.coord.lat,
+      lon: data.coord.lon,
     };
     setChangeCities((oldCities) => [...oldCities, cityS]);
     setCity("");
@@ -50,14 +52,13 @@ const SearchCities = () => {
           onSubmitEditing={onSearch}
           style={styles.textInput}
         />
-        {/* <Button title="🔎" onPress={onSearch} /> */}
       </View>
       {cities.length ? (
         <View style={styles.citiesL}>
           <FlatList
             data={cities}
             ItemSeparatorComponent={() => <Text> </Text>}
-            renderItem={({ item: city }) => <Card {...city} />}
+            renderItem={({ item: city }) => <MinimalCard {...city} />}
           />
         </View>
       ) : null}

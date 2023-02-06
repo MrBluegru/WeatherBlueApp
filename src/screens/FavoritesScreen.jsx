@@ -1,8 +1,12 @@
 import React from "react";
-import Favorites from "../components/favorites/Favorites";
+import { View, Text } from "react-native";
 
 const FavoritesScreen = () => {
-  return <Favorites />;
+  return (
+    <View>
+      <Text>Favorites</Text>
+    </View>
+  );
 };
 
 export default FavoritesScreen;

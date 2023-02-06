@@ -27,6 +27,8 @@ const searchCurrentCity = async (lat, lon) => {
         timeDataUnix: data.dt,
         sunrise: data.sys.sunrise,
         sunset: data.sys.sunset,
+        lat: data.coord.lat,
+        lon: data.coord.lon,
       };
       return city;
     } else {

@@ -14,6 +14,8 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
+    paddingBottom: 10,
+    paddingTop: 10,
   },
   viewSubtitle: {
     justifyContent: "center",
@@ -26,5 +28,19 @@ export const styles = StyleSheet.create({
   subTitle: {
     fontSize: 20,
     fontWeight: "bold",
+  },
+  normalTextI: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  mapView: {
+    flex: 1,
+    height: 220,
+    width: 350,
+  },
+  containerMap: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

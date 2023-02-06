@@ -1,12 +1,33 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
-import { styles } from "../../styles/cardH.Styles";
-import unixToTime from "../../utils/unixToTime";
+import { styles } from "../../styles/allDataCard.Styles";
 import degreesToCardinal from "../../utils/degreesToCardinal";
+import unixToTime from "../../utils/unixToTime";
 import mpsToKph from "../../utils/mpsTokps";
 import mtsToKm from "../../utils/mtsToKm";
+import MapView from "react-native-maps";
 
-const CardH = (props) => {
+const AllDataCard = (props) => {
+  const map = () => {
+    return (
+      <MapView
+        style={styles.mapView}
+        initialRegion={{
+          latitude: props.lat,
+          longitude: props.lon,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
+        mapType="hybrid"
+        showsUserLocation={true}
+        showsMyLocationButton={true}
+        zoomEnabled={true}
+        rotateEnabled={false}
+        scrollEnabled={true}
+      />
+    );
+  };
+
   return (
     <View style={styles.containerCenter}>
       <View style={styles.childContainers}>
@@ -16,6 +37,7 @@ const CardH = (props) => {
           <Text>Current: {props.temp} ºC</Text>
           <Text>Feels Like: {props.feelsLike} ºC</Text>
           <Text>Humidity: {props.humidity} %</Text>
+          <Text>Cloudiness: {props.clouds}%</Text>
         </View>
 
         <View>
@@ -74,12 +96,18 @@ const CardH = (props) => {
         </View>
       </View>
 
-      <Text>Cloudiness: {props.clouds}%</Text>
-      <Text>Sunrise: {unixToTime(props.sunrise)}</Text>
-      <Text>Sunset: {unixToTime(props.sunset)}</Text>
-      <Text>Updated: {unixToTime(props.timeDataUnix)}</Text>
+      <View style={styles.childContainers}>
+        <Text>Sunrise: {unixToTime(props.sunrise)}</Text>
+        <Text>Sunset: {unixToTime(props.sunset)}</Text>
+      </View>
+      <View style={styles.containerMap}>{props !== null ? map() : null}</View>
+      <View style={styles.childContainers}>
+        <Text style={styles.normalTextI}>
+          Last update {unixToTime(props.timeDataUnix)}
+        </Text>
+      </View>
     </View>
   );
 };
 
-export default CardH;
+export default AllDataCard;
