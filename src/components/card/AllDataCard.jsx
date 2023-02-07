@@ -6,6 +6,8 @@ import unixToTime from "../../utils/unixToTime";
 import mpsToKph from "../../utils/mpsTokps";
 import mtsToKm from "../../utils/mtsToKm";
 import MapView from "react-native-maps";
+import colorByTemp from "../../utils/colorsTemp";
+import capitalizedWord from "../../utils/capitalizedWord";
 
 const AllDataCard = (props) => {
   const map = () => {
@@ -20,24 +22,29 @@ const AllDataCard = (props) => {
         }}
         mapType="hybrid"
         showsUserLocation={true}
-        showsMyLocationButton={true}
-        zoomEnabled={true}
+        showsMyLocationButton={false}
+        zoomEnabled={false}
         rotateEnabled={false}
-        scrollEnabled={true}
+        scrollEnabled={false}
       />
     );
   };
 
   return (
-    <View style={styles.containerCenter}>
+    <View
+      style={[
+        styles.containerCenter,
+        { backgroundColor: colorByTemp(props.temp) },
+      ]}
+    >
       <View style={styles.childContainers}>
         <View>
           <Text style={styles.title}>{props.name}</Text>
-          <Text>{props.weather}</Text>
-          <Text>Current: {props.temp} ºC</Text>
-          <Text>Feels Like: {props.feelsLike} ºC</Text>
-          <Text>Humidity: {props.humidity} %</Text>
-          <Text>Cloudiness: {props.clouds}%</Text>
+          <Text>{capitalizedWord(props.weather)}</Text>
+          <Text>Current {props.temp}ºC</Text>
+          <Text>Feels Like {props.feelsLike}ºC</Text>
+          <Text>Humidity {props.humidity}%</Text>
+          <Text>Cloudiness {props.clouds}%</Text>
         </View>
 
         <View>
@@ -59,8 +66,8 @@ const AllDataCard = (props) => {
           <Text>Maximum</Text>
         </View>
         <View style={styles.childContainers}>
-          <Text>{props.tempMin} ºC</Text>
-          <Text>{props.tempMax} ºC</Text>
+          <Text>{props.tempMin}ºC</Text>
+          <Text>{props.tempMax}ºC</Text>
         </View>
       </View>
 

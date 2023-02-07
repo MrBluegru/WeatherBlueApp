@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     marginBotton: 10,
     marginVertical: 10,
     marginHorizontal: 15,
-    width: "80%",
+    width: "95%",
   },
   citiesL: {
     flex: 1,

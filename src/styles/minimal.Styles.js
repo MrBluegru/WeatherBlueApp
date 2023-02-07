@@ -6,13 +6,14 @@ export const styles = StyleSheet.create({
     justifyContent: "space-around",
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: "#999",
-    marginVertical: 10,
+    borderColor: "#000",
+    marginVertical: 6,
     marginHorizontal: 10,
+    paddingVertical: 20
   },
   icon: {
-    width: 140,
-    height: 140,
+    width: 100,
+    height: 100,
   },
   title: {
     marginVertical: 4,
@@ -32,8 +33,10 @@ export const styles = StyleSheet.create({
   },
   modalView: {
     flex: 1,
-    backgroundColor: "#ffd",
     justifyContent: "center",
     alignItems: "center",
+  },
+  btons: {
+    justifyContent: 'space-around'
   },
 });

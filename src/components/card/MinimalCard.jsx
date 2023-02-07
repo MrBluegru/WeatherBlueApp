@@ -7,11 +7,14 @@ import {
   Modal,
   Pressable,
   ScrollView,
+  Button,
 } from "react-native";
 import { MaterialIcons, Entypo } from "@expo/vector-icons";
 import { styles } from "../../styles/minimal.Styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AllDataCard from "./AllDataCard";
+import colorByTemp from "../../utils/colorsTemp";
+import capitalizedWord from "../../utils/capitalizedWord";
 
 const MinimalCard = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -44,35 +47,42 @@ const MinimalCard = (props) => {
 
   const modalViewCard = () => {
     return (
-      <View>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            setModalVisible(!modalVisible);
-          }}
+      <Modal
+        animationType="slide"
+        transparent={false}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View
+          style={[
+            styles.modalView,
+            { backgroundColor: colorByTemp(props.temp) },
+          ]}
         >
-          <View>
-            <ScrollView contentContainerStyle={styles.modalView}>
-              <AllDataCard {...props} />
-              <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => setModalVisible(!modalVisible)}
-              >
-                <Text style={styles.textStyle}>Close</Text>
-              </Pressable>
-            </ScrollView>
-          </View>
-        </Modal>
-      </View>
+          <ScrollView
+            style={{ flex: 1 }}
+            contentContainerStyle={{ padding: 12 }}
+            alwaysBounceVertical={true}
+            showsVerticalScrollIndicator={false}
+          >
+            <AllDataCard {...props} />
+            <Button
+              style={styles.button}
+              onPress={() => setModalVisible(!modalVisible)}
+              title="Close"
+            />
+          </ScrollView>
+        </View>
+      </Modal>
     );
   };
 
   return (
     <>
       {modalViewCard()}
-      <View style={styles.card}>
+      <View style={[styles.card, { backgroundColor: colorByTemp(props.temp) }]}>
         <View>
           <Image
             style={styles.icon}
@@ -83,19 +93,14 @@ const MinimalCard = (props) => {
         </View>
         <View>
           <Text style={styles.title}>
-            {props.name} {props.temp}°
+            {props.name} {props.temp} °C
           </Text>
-          <Text>Weather: {props.weather}</Text>
-          <Text style={styles.title}>Temperature</Text>
-          <View style={{ flexDirection: "row" }}>
-            <Text>Min: {props.tempMin}</Text>
-            <Text> Max: {props.tempMax}</Text>
-          </View>
-          <Text>Clouds: {props.clouds} %</Text>
-          <Text>Wind: {props.wind}</Text>
+          <Text>{capitalizedWord(props.weather)}</Text>
+          <Text>Clouds {props.clouds} %</Text>
+          <Text>Feels like {props.feelsLike} °C</Text>
         </View>
 
-        <View style={{ justifyContent: "center" }}>
+        <View style={styles.btons}>
           <TouchableOpacity onPress={() => setModalVisible(true)}>
             <Entypo
               name="eye"

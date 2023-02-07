@@ -59,6 +59,7 @@ const SearchCities = () => {
             data={cities}
             ItemSeparatorComponent={() => <Text> </Text>}
             renderItem={({ item: city }) => <MinimalCard {...city} />}
+            showsVerticalScrollIndicator={false}
           />
         </View>
       ) : null}
