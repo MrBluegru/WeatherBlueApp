@@ -5,17 +5,20 @@ import searchCitiesByName from "../../utils/searchByName";
 import { useDispatch, useSelector } from "react-redux";
 import { addCitieReducer } from "../../redux/citiesSlice";
 
-const SearchCities = () => {
+const SearchBar = () => {
   const dispatch = useDispatch();
   const cities = useSelector((state) => state.cities.cities);
   const [city, setCity] = useState("");
 
   const onSearch = async () => {
-    if (city === "") {
-      Alert.alert("Alerta", "Se requiere un nombre que buscar");
+    let itsEmpty = /^\s/g.test(city);
+    if (city === "" || itsEmpty) {
+      Alert.alert("Wait", "I need a name to search");
+      setCity("");
     } else {
       const newCitie = await searchCitiesByName(city);
       dispatch(addCitieReducer(newCitie));
+      setCity("");
     }
   };
 
@@ -32,4 +35,4 @@ const SearchCities = () => {
   );
 };
 
-export default SearchCities;
+export default SearchBar;

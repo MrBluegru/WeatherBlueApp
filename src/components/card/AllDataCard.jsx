@@ -29,7 +29,7 @@ const AllDataCard = (props) => {
       />
     );
   };
-
+  
   return (
     <View
       style={[
