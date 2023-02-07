@@ -95,7 +95,7 @@ const MinimalCard = (props) => {
           <Text style={styles.title}>
             {props.name} {props.temp} °C
           </Text>
-          <Text>{capitalizedWord(props.weather)}</Text>
+          {/* <Text>{capitalizedWord(props.weather)}</Text> */}
           <Text>Clouds {props.clouds} %</Text>
           <Text>Feels like {props.feelsLike} °C</Text>
         </View>

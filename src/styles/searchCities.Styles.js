@@ -1,14 +1,12 @@
 import { StyleSheet } from "react-native";
-import Constants from "expo-constants";
 
 export const styles = StyleSheet.create({
-  allView: {
-    flex: 1,
-    paddingTop: Constants.statusBarHeight,
-    marginHorizontal: 10,
+  initialSearch: {
+    justifyContent: "center",
+    alignItems: "center",
   },
-  search: {
-    flexDirection: "row",
+  lastISearch: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -22,8 +20,5 @@ export const styles = StyleSheet.create({
     marginVertical: 10,
     marginHorizontal: 15,
     width: "95%",
-  },
-  citiesL: {
-    flex: 1,
   },
 });

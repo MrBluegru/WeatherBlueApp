@@ -16,7 +16,7 @@ export const favoritesSlice = createSlice({
     },
     deleteFavReducer: (state, action) => {
       const id = action.payload;
-      state.favorites = state.favorites.filter((favC) => favorites.id !== id);
+      state.favorites = state.favorites.filter((favC) => favC.id !== id);
     },
   },
 });
