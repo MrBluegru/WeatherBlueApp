@@ -15,31 +15,26 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import AllDataCard from "./AllDataCard";
 import colorByTemp from "../../utils/colorsTemp";
 import capitalizedWord from "../../utils/capitalizedWord";
+import unixToTime from "../../utils/unixToTime";
+import { useDispatch, useSelector } from "react-redux";
+import { addFavReducer } from "../../redux/favoritesSlice";
 
 const MinimalCard = (props) => {
+  const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
-  const [listCities, setListCities] = useState([]);
+  const listCities = useSelector((state) => state.favorites.favorites);
 
-  useEffect(() => {
-    const getFavorites = async () => {
-      try {
-        const oldCities = await AsyncStorage.getItem("@FavCities");
-        oldCities !== null ? setListCities(JSON.parse(oldCities)) : null;
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getFavorites();
-  }, []);
+  console.log(typeof listCities);
 
   const setFavorites = async () => {
     const newCity = { id: props.id, name: props.name };
 
     try {
       await AsyncStorage.setItem(
-        "@FavCities",
+        "@FavoritesCities",
         JSON.stringify([...listCities, newCity])
       );
+      dispatch(addFavReducer(newCity));
     } catch (error) {
       console.log(error);
     }
@@ -95,9 +90,10 @@ const MinimalCard = (props) => {
           <Text style={styles.title}>
             {props.name} {props.temp} °C
           </Text>
-          {/* <Text>{capitalizedWord(props.weather)}</Text> */}
+          <Text>{capitalizedWord(props.weather)}</Text>
           <Text>Clouds {props.clouds} %</Text>
           <Text>Feels like {props.feelsLike} °C</Text>
+          <Text>Last update {unixToTime(props.timeDataUnix)}</Text>
         </View>
 
         <View style={styles.btons}>
@@ -109,7 +105,7 @@ const MinimalCard = (props) => {
               // style={styles.icons}
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={setFavorites}>
+          <TouchableOpacity onPress={() => setFavorites()}>
             <Entypo
               name="star"
               size={24}
