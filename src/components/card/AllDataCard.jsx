@@ -39,7 +39,7 @@ const AllDataCard = (props) => {
     >
       <View style={styles.childContainers}>
         <View>
-          <Text style={styles.title}>{props.name}</Text>
+          <Text style={styles.title}>{props.name}, {props.country}</Text>
           <Text>{capitalizedWord(props.weather)}</Text>
           <Text>Current {props.temp}ºC</Text>
           <Text>Feels Like {props.feelsLike}ºC</Text>

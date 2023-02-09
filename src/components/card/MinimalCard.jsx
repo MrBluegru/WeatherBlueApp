@@ -8,6 +8,7 @@ import {
   Pressable,
   ScrollView,
   Button,
+  Alert,
 } from "react-native";
 import { MaterialIcons, Entypo } from "@expo/vector-icons";
 import { styles } from "../../styles/minimal.Styles";
@@ -17,24 +18,58 @@ import colorByTemp from "../../utils/colorsTemp";
 import capitalizedWord from "../../utils/capitalizedWord";
 import unixToTime from "../../utils/unixToTime";
 import { useDispatch, useSelector } from "react-redux";
-import { addFavReducer } from "../../redux/favoritesSlice";
+import { addFavReducer, deleteFavReducer } from "../../redux/favoritesSlice";
+import { deleteCitieReducer } from "../../redux/citiesSlice";
 
 const MinimalCard = (props) => {
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
   const listCities = useSelector((state) => state.favorites.favorites);
+  const alreadyAdded = listCities.filter((city) => city.id === props.id);
 
-  console.log(typeof listCities);
-
-  const setFavorites = async () => {
+  const handlerFavorites = async () => {
     const newCity = { id: props.id, name: props.name };
 
+    if (alreadyAdded.length) {
+      Alert.alert("Wait", "Are you sure you want to remove favorites ?", [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "remove",
+          onPress: async () => {
+            try {
+              dispatch(deleteFavReducer(props.id));
+              await AsyncStorage.setItem(
+                "@FavoritesCities",
+                JSON.stringify(
+                  listCities.filter((city) => city.id !== props.id)
+                )
+              );
+            } catch (error) {
+              console.log(error);
+            }
+          },
+        },
+      ]);
+    }
+    if (!alreadyAdded.length) {
+      try {
+        await AsyncStorage.setItem(
+          "@FavoritesCities",
+          JSON.stringify([...listCities, newCity])
+        );
+        dispatch(addFavReducer(newCity));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  const deleteCity = () => {
     try {
-      await AsyncStorage.setItem(
-        "@FavoritesCities",
-        JSON.stringify([...listCities, newCity])
-      );
-      dispatch(addFavReducer(newCity));
+      dispatch(deleteCitieReducer(props.id));
     } catch (error) {
       console.log(error);
     }
@@ -88,7 +123,7 @@ const MinimalCard = (props) => {
         </View>
         <View>
           <Text style={styles.title}>
-            {props.name} {props.temp} °C
+            {props.name}, {props.country} {props.temp} °C
           </Text>
           <Text>{capitalizedWord(props.weather)}</Text>
           <Text>Clouds {props.clouds} %</Text>
@@ -105,15 +140,15 @@ const MinimalCard = (props) => {
               // style={styles.icons}
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => setFavorites()}>
+          <TouchableOpacity onPress={handlerFavorites}>
             <Entypo
               name="star"
               size={24}
-              color={"black"}
+              color={alreadyAdded.length ? "yellow" : "black"}
               // style={styles.icons}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={deleteCity}>
             <MaterialIcons
               name="delete-outline"
               size={24}

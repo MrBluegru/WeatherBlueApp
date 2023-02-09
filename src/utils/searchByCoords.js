@@ -9,6 +9,7 @@ const searchCurrentCity = async (lat, lon) => {
       const city = {
         id: data.id,
         name: data.name,
+        country: data.sys.country,
         weather: data.weather[0].description,
         feelsLike: data.main.feels_like,
         temp: data.main.temp,

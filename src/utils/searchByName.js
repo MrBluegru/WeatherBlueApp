@@ -1,6 +1,7 @@
 import { API_KEY } from "@env";
 
-const searchCitiesByName = async (name) => {
+const searchCitiesByName = async (value) => {
+  const name = value.trim();
   const response = await fetch(
     `https://api.openweathermap.org/data/2.5/weather?q=${name},&appid=${API_KEY}&units=metric`
   );
@@ -10,6 +11,7 @@ const searchCitiesByName = async (name) => {
       const city = {
         id: data.id,
         name: data.name,
+        country: data.sys.country,
         weather:
           data.weather[0] !== undefined ? data.weather[0].description : "n/a",
         feelsLike: data.main.feels_like,
@@ -34,7 +36,7 @@ const searchCitiesByName = async (name) => {
       };
       return city;
     }
-    if (data.cod === '404') {
+    if (data.cod === "404") {
       return data.message;
     }
   } catch (error) {

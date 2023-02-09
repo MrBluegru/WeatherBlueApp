@@ -12,13 +12,22 @@ const SearchBar = () => {
 
   const onSearch = async () => {
     let itsEmpty = /^\s/g.test(city);
+    const newCitie = await searchCitiesByName(city);
+    
     if (city === "" || itsEmpty) {
       Alert.alert("Wait", "I need a name to search");
-      setCity("");
     } else {
-      const newCitie = await searchCitiesByName(city);
-      dispatch(addCitieReducer(newCitie));
-      setCity("");
+      const alreadyAdded = cities.filter((city) => city.id === newCitie.id);
+      
+      if (newCitie === "city not found") {
+        return Alert.alert("Wait", `${city} city not found`);
+      }
+      if (!alreadyAdded.length) {
+        dispatch(addCitieReducer(newCitie));
+        setCity("");
+      } else {
+        return Alert.alert("Wait", "City already added"), { cancelable: false };
+      }
     }
   };
 
