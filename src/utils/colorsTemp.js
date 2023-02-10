@@ -3,7 +3,7 @@ const colorByTemp = (temp) => {
     return "#383061";
   } else if (temp <= -10) {
     return "#407071";
-  } else if (temp <= 0) {
+  } else if (temp < 1) {
     return "#3b5878";
   } else if (temp >= 1 && temp < 10) {
     return "#44664c";

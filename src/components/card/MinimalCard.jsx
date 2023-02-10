@@ -23,12 +23,13 @@ import { deleteCitieReducer } from "../../redux/citiesSlice";
 
 const MinimalCard = (props) => {
   const dispatch = useDispatch();
+  const { city, btnDelete } = props;
   const [modalVisible, setModalVisible] = useState(false);
   const listCities = useSelector((state) => state.favorites.favorites);
-  const alreadyAdded = listCities.filter((city) => city.id === props.id);
+  const alreadyAdded = listCities.filter((c) => c.id === city.id);
 
   const handlerFavorites = async () => {
-    const newCity = { id: props.id, name: props.name };
+    const newCity = { id: city.id, name: city.name };
 
     if (alreadyAdded.length) {
       Alert.alert("Wait", "Are you sure you want to remove favorites ?", [
@@ -40,12 +41,10 @@ const MinimalCard = (props) => {
           text: "remove",
           onPress: async () => {
             try {
-              dispatch(deleteFavReducer(props.id));
+              dispatch(deleteFavReducer(city.id));
               await AsyncStorage.setItem(
                 "@FavoritesCities",
-                JSON.stringify(
-                  listCities.filter((city) => city.id !== props.id)
-                )
+                JSON.stringify(listCities.filter((city) => city.id !== city.id))
               );
             } catch (error) {
               console.log(error);
@@ -69,7 +68,7 @@ const MinimalCard = (props) => {
 
   const deleteCity = () => {
     try {
-      dispatch(deleteCitieReducer(props.id));
+      dispatch(deleteCitieReducer(city.id));
     } catch (error) {
       console.log(error);
     }
@@ -88,7 +87,7 @@ const MinimalCard = (props) => {
         <View
           style={[
             styles.modalView,
-            { backgroundColor: colorByTemp(props.temp) },
+            { backgroundColor: colorByTemp(city.temp) },
           ]}
         >
           <ScrollView
@@ -97,7 +96,7 @@ const MinimalCard = (props) => {
             alwaysBounceVertical={true}
             showsVerticalScrollIndicator={false}
           >
-            <AllDataCard {...props} />
+            <AllDataCard {...city} />
             <Button
               style={styles.button}
               onPress={() => setModalVisible(!modalVisible)}
@@ -112,23 +111,23 @@ const MinimalCard = (props) => {
   return (
     <>
       {modalViewCard()}
-      <View style={[styles.card, { backgroundColor: colorByTemp(props.temp) }]}>
+      <View style={[styles.card, { backgroundColor: colorByTemp(city.temp) }]}>
         <View>
           <Image
             style={styles.icon}
             source={{
-              uri: `http://openweathermap.org/img/wn/${props.img}@4x.png`,
+              uri: `http://openweathermap.org/img/wn/${city.img}@4x.png`,
             }}
           />
         </View>
         <View>
           <Text style={styles.title}>
-            {props.name}, {props.country} {props.temp} °C
+            {city.name}, {city.country} {city.temp} °C
           </Text>
-          <Text>{capitalizedWord(props.weather)}</Text>
-          <Text>Clouds {props.clouds} %</Text>
-          <Text>Feels like {props.feelsLike} °C</Text>
-          <Text>Last update {unixToTime(props.timeDataUnix)}</Text>
+          <Text>{capitalizedWord(city.weather)}</Text>
+          <Text>Clouds {city.clouds} %</Text>
+          <Text>Feels like {city.feelsLike} °C</Text>
+          <Text>Last update {unixToTime(city.timeDataUnix)}</Text>
         </View>
 
         <View style={styles.btons}>
@@ -148,14 +147,17 @@ const MinimalCard = (props) => {
               // style={styles.icons}
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={deleteCity}>
-            <MaterialIcons
-              name="delete-outline"
-              size={24}
-              color={"black"}
-              // style={styles.icons}
-            />
-          </TouchableOpacity>
+
+          {btnDelete ? (
+            <TouchableOpacity onPress={deleteCity}>
+              <MaterialIcons
+                name="delete-outline"
+                size={24}
+                color={"black"}
+                // style={styles.icons}
+              />
+            </TouchableOpacity>
+          ) : null}
         </View>
       </View>
     </>

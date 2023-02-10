@@ -10,7 +10,9 @@ const ListCities = () => {
       <FlatList
         data={cities}
         ItemSeparatorComponent={() => <Text> </Text>}
-        renderItem={({ item: city }) => <MinimalCard {...city} />}
+        renderItem={({ item: city }) => (
+          <MinimalCard city={city} btnDelete={true} />
+        )}
         showsVerticalScrollIndicator={false}
       />
     </View>

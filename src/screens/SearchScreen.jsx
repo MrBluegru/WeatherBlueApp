@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { ImageBackground, View } from "react-native";
 import { useSelector } from "react-redux";
 import { styles } from "../styles/searchScreen.Styles";
 import ListCities from "../components/listCities/ListCities";
@@ -13,6 +13,11 @@ const SearchScreen = () => {
       <SearchBar />
       {cities.length ? <ListCities /> : null}
     </View>
+    // <ImageBackground
+    //   source={require("../img/mkt.gif")}
+    //   style={styles.background}
+    // >
+    //</ImageBackground>
   );
 };
 

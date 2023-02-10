@@ -43,7 +43,7 @@ const MyTabs = () => {
         }}
       />
       <Tab.Screen
-        name="Favorites"
+        name="Your Favorites Cities"
         component={FavoritesScreen}
         options={{
           tabBarLabel: "Favorites",

@@ -14,7 +14,6 @@ const HomeScreen = () => {
   const { location } = useLocate();
   const [dataCity, setDataCity] = useState(null);
   const listCities = useSelector((state) => state.favorites.favorites);
-  console.log("Redux Favorites =>", listCities);
 
   useEffect(() => {
     const getFavorites = async () => {
