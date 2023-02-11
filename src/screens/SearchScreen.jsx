@@ -10,14 +10,15 @@ const SearchScreen = () => {
 
   return (
     <View style={styles.container}>
-      <SearchBar />
-      {cities.length ? <ListCities /> : null}
+      <ImageBackground
+        source={require("../img/globe.gif")}
+        style={styles.background}
+        resizeMode="cover"
+      >
+        <SearchBar />
+        {cities.length ? <ListCities /> : null}
+      </ImageBackground>
     </View>
-    // <ImageBackground
-    //   source={require("../img/mkt.gif")}
-    //   style={styles.background}
-    // >
-    //</ImageBackground>
   );
 };
 

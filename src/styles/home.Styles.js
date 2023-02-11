@@ -10,9 +10,10 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#ffffff",
   },
   icon: {
-    width: "100%",
-    height: "100%",
+    flex: 1,
+    resizeMode: "center",
   },
 });

@@ -13,12 +13,12 @@ const SearchBar = () => {
   const onSearch = async () => {
     let itsEmpty = /^\s/g.test(city);
     const newCitie = await searchCitiesByName(city);
-    
+
     if (city === "" || itsEmpty) {
       Alert.alert("Wait", "I need a name to search");
     } else {
       const alreadyAdded = cities.filter((city) => city.id === newCitie.id);
-      
+
       if (newCitie === "city not found") {
         return Alert.alert("Wait", `${city} city not found`);
       }
@@ -35,7 +35,7 @@ const SearchBar = () => {
     <View style={cities.length ? styles.initialSearch : styles.lastISearch}>
       <TextInput
         value={city}
-        placeholder="city"
+        placeholder="🔍 Search city"
         onChangeText={setCity}
         onSubmitEditing={onSearch}
         style={styles.textInput}

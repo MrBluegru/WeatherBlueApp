@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { View, ScrollView, Image } from "react-native";
+import { View, ScrollView, Image, Text } from "react-native";
 import searchCurrentCity from "../utils/searchByCoords";
 import colorByTemp from "../utils/colorsTemp";
 import { styles } from "../styles/home.Styles";
 import useLocate from "../hooks/useLocate";
 import AllDataCard from "../components/card/AllDataCard";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setFavReducer } from "../redux/favoritesSlice";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
-  const { location } = useLocate();
+  const { location, error } = useLocate();
   const [dataCity, setDataCity] = useState(null);
-  const listCities = useSelector((state) => state.favorites.favorites);
+
 
   useEffect(() => {
     const getFavorites = async () => {
@@ -55,9 +55,19 @@ const HomeScreen = () => {
             <AllDataCard {...dataCity} />
           </ScrollView>
         </View>
+      ) : !error ? (
+        <View style={styles.containerCenter}>
+          <Image style={styles.icon} source={require("../img/locate.gif")} />
+        </View>
       ) : (
         <View style={styles.containerCenter}>
-          <Image style={styles.icon} source={require("../img/loading.gif")} />
+          <Image
+            style={[styles.icon, {marginTop: 200}]}
+            source={require("../img/errorLocate.gif")}
+          />
+          <Text style={{ color: "red", fontWeight: "bold", fontSize: 16 }}>
+            Turn on device location.
+          </Text>
         </View>
       )}
     </>
