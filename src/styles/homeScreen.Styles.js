@@ -13,7 +13,12 @@ export const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
   },
   icon: {
-    flex: 1,
-    resizeMode: "center",
+    resizeMode: "stretch",
+  },
+  errorLocate: {
+    color: "red",
+    fontWeight: "bold",
+    fontSize: 18,
+    top: 40,
   },
 });

@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
   Image,
   TouchableOpacity,
   Modal,
-  Pressable,
   ScrollView,
   Button,
   Alert,
@@ -20,6 +19,8 @@ import unixToTime from "../../utils/unixToTime";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavReducer, deleteFavReducer } from "../../redux/favoritesSlice";
 import { deleteCitieReducer } from "../../redux/citiesSlice";
+import { getLocales } from "expo-localization";
+import handlerLanguage from "../../utils/language";
 
 const MinimalCard = (props) => {
   const dispatch = useDispatch();
@@ -28,30 +29,39 @@ const MinimalCard = (props) => {
   const listCities = useSelector((state) => state.favorites.favorites);
   const alreadyAdded = listCities.filter((c) => c.id === city.id);
 
+  const locates = getLocales();
+  const language = locates[0].languageCode;
+
   const handlerFavorites = async () => {
     const newCity = { id: city.id, name: city.name };
 
     if (alreadyAdded.length) {
-      Alert.alert("Wait", "Are you sure you want to remove favorites ?", [
-        {
-          text: "Cancel",
-          style: "cancel",
-        },
-        {
-          text: "remove",
-          onPress: async () => {
-            try {
-              dispatch(deleteFavReducer(city.id));
-              await AsyncStorage.setItem(
-                "@FavoritesCities",
-                JSON.stringify(listCities.filter((city) => city.id !== city.id))
-              );
-            } catch (error) {
-              console.log(error);
-            }
+      Alert.alert(
+        handlerLanguage("wait", language),
+        handlerLanguage("alertDeleteFav", language),
+        [
+          {
+            text: handlerLanguage("cancel", language),
+            style: "cancel",
           },
-        },
-      ]);
+          {
+            text: handlerLanguage("remove", language),
+            onPress: async () => {
+              try {
+                dispatch(deleteFavReducer(city.id));
+                await AsyncStorage.setItem(
+                  "@FavoritesCities",
+                  JSON.stringify(
+                    listCities.filter((city) => city.id !== city.id)
+                  )
+                );
+              } catch (error) {
+                console.log(error);
+              }
+            },
+          },
+        ]
+      );
     }
     if (!alreadyAdded.length) {
       try {

@@ -15,7 +15,7 @@ const useLocation = () => {
         setLocation(currentLocation);
       }
     } catch (error) {
-      setError(error);
+      setError(error.code);
     }
   };
 

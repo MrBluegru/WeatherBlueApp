@@ -2,15 +2,19 @@ import React, { useEffect, useState } from "react";
 import { View, ScrollView, Image, Text } from "react-native";
 import searchCurrentCity from "../utils/searchByCoords";
 import colorByTemp from "../utils/colorsTemp";
-import { styles } from "../styles/home.Styles";
+import { styles } from "../styles/homeScreen.Styles";
 import useLocate from "../hooks/useLocate";
 import AllDataCard from "../components/card/AllDataCard";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useDispatch } from "react-redux";
 import { setFavReducer } from "../redux/favoritesSlice";
+import { getLocales } from "expo-localization";
+import handlerLanguage from "../utils/language";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
+  const locates = getLocales();
+  const language = locates[0].languageCode;
   const { location, error } = useLocate();
   const [dataCity, setDataCity] = useState(null);
 
@@ -55,19 +59,21 @@ const HomeScreen = () => {
             <AllDataCard {...dataCity} />
           </ScrollView>
         </View>
-      ) : !error ? (
+      ) : error ? (
         <View style={styles.containerCenter}>
-          <Image style={styles.icon} source={require("../img/locate.gif")} />
+          <Image
+            source={require("../img/errorLocate.gif")}
+            style={styles.icon}
+          />
+          <View>
+            <Text style={styles.errorLocate}>
+              {handlerLanguage("errorLocate", language)}
+            </Text>
+          </View>
         </View>
       ) : (
         <View style={styles.containerCenter}>
-          <Image
-            style={[styles.icon, {marginTop: 200}]}
-            source={require("../img/errorLocate.gif")}
-          />
-          <Text style={{ color: "red", fontWeight: "bold", fontSize: 16 }}>
-            Turn on device location.
-          </Text>
+          <Image style={styles.icon} source={require("../img/locate.gif")} />
         </View>
       )}
     </>

@@ -4,6 +4,11 @@ import { styles } from "../../styles/searchCities.Styles";
 import searchCitiesByName from "../../utils/searchByName";
 import { useDispatch, useSelector } from "react-redux";
 import { addCitieReducer } from "../../redux/citiesSlice";
+import handlerLanguage from "../../utils/language";
+import { getLocales } from "expo-localization";
+
+const locates = getLocales();
+const language = locates[0].languageCode;
 
 const SearchBar = () => {
   const dispatch = useDispatch();
@@ -35,7 +40,7 @@ const SearchBar = () => {
     <View style={cities.length ? styles.initialSearch : styles.lastISearch}>
       <TextInput
         value={city}
-        placeholder="🔍 Search city"
+        placeholder={handlerLanguage("placeHolderSearch", language)}
         onChangeText={setCity}
         onSubmitEditing={onSearch}
         style={styles.textInput}
