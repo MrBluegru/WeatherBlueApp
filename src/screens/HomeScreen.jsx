@@ -63,7 +63,7 @@ const HomeScreen = () => {
         <View style={styles.containerCenter}>
           <Image
             source={require("../img/errorLocate.gif")}
-            style={styles.icon}
+            style={styles.iconError}
           />
           <View>
             <Text style={styles.errorLocate}>

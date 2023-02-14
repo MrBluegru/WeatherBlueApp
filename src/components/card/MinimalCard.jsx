@@ -104,7 +104,7 @@ const MinimalCard = (props) => {
             style={{ flex: 1 }}
             contentContainerStyle={{ padding: 12 }}
             alwaysBounceVertical={true}
-            showsVerticalScrollIndicator={false}
+            showsVerticalScrollIndicator={true}
           >
             <AllDataCard {...city} />
             <Button

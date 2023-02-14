@@ -13,6 +13,9 @@ export const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
   },
   icon: {
+    resizeMode: "center",
+  },
+  iconError: {
     resizeMode: "stretch",
   },
   errorLocate: {
