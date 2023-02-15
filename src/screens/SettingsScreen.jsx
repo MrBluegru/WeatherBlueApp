@@ -1,88 +1,93 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, Switch } from "react-native";
-import Constants from "expo-constants";
+import { View, Text, Switch, Button } from "react-native";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateThemeReducer, updateUDSReducer } from "../redux/settingsSlice";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { styles } from "../styles/settingsScreen.Styles";
+import { Appearance } from "react-native";
 
 const SettingsScreen = () => {
-  const [esLang, setEsLang] = useState(false);
-  const [enLang, setEnLang] = useState(false);
-  const [lightTh, setLighTh] = useState(false);
-  const [darkTh, setDarkTh] = useState(false);
+  const dispatch = useDispatch();
+  const colorScheme = Appearance.getColorScheme();
 
-  const handlerLanguage = () => {};
-  const handlerTheme = () => {};
+  const themeSelected = useSelector((state) => state.settings.settings.theme);
+  const isUseDevice = useSelector(
+    (state) => state.settings.settings.useDeviceSettings
+  );
+
+  const [theme, setTheme] = useState(themeSelected);
+  const [useDeviceSettings, setUseDeviceSettings] = useState(
+    isUseDevice === null ? false : isUseDevice
+  );
+
+  const themeActive = isUseDevice ? colorScheme : themeSelected;
+  const isDarkTheme = themeActive === "dark";
+
+  useEffect(() => {
+    const updateSettings = async () => {
+      try {
+        dispatch(updateThemeReducer(theme));
+        dispatch(updateUDSReducer(useDeviceSettings));
+        AsyncStorage.setItem(
+          "@SettingsWeatherB",
+          JSON.stringify({ theme, useDeviceSettings })
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    updateSettings();
+  }, [theme, useDeviceSettings]);
 
   return (
-    <View style={styles.container}>
+    <View
+      style={
+        isDarkTheme
+          ? [styles.container, styles.backDark]
+          : [styles.container, styles.backLight]
+      }
+    >
       <View style={styles.separator} />
-      <View style={{ alignItems: "center" }}>
-        <Text>Language</Text>
+
+      <View style={styles.subTitle}>
+        <Text style={isDarkTheme ? styles.textDark : styles.textLight}>
+          Theme
+        </Text>
       </View>
+
       <View style={styles.separator} />
+
+      {!useDeviceSettings ? (
+        <View style={styles.inputContainer}>
+          <Button
+            title="light"
+            onPress={() => setTheme("light")}
+            color={theme === "light" ? "green" : null}
+          />
+          <Button
+            title="dark"
+            onPress={() => setTheme("dark")}
+            color={theme === "dark" ? "green" : null}
+          />
+        </View>
+      ) : null}
       <View style={styles.inputContainer}>
-        <Text>Spanish</Text>
+        <Text style={isDarkTheme ? styles.textDark : styles.textLight}>
+          Use device settings
+        </Text>
         <Switch
           trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={esLang ? "#f5dd4b" : "#f4f3f4"}
+          thumbColor={useDeviceSettings ? "#f5dd4b" : "#f4f3f4"}
           ios_backgroundColor="#3e3e3e"
-          onValueChange={handlerLanguage}
-          value={esLang}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <Text>English</Text>
-        <Switch
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={enLang ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={handlerLanguage}
-          value={enLang}
-        />
-      </View>
-      <View style={styles.separator} />
-      <View style={{ alignItems: "center" }}>
-        <Text>Theme</Text>
-      </View>
-      <View style={styles.separator} />
-      <View style={styles.inputContainer}>
-        <Text>Light</Text>
-        <Switch
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={lightTh ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={handlerTheme}
-          value={lightTh}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <Text>Dark</Text>
-        <Switch
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={darkTh ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={handlerTheme}
-          value={darkTh}
+          onValueChange={() =>
+            setUseDeviceSettings((previousState) => !previousState)
+          }
+          value={useDeviceSettings}
         />
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: Constants.statusBarHeight,
-  },
-  inputContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 10,
-  },
-  separator: {
-    borderBottomColor: "#bbb",
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    marginVertical: 10,
-  },
-});
 
 export default SettingsScreen;

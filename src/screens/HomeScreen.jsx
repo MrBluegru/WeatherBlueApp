@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { setFavReducer } from "../redux/favoritesSlice";
 import { getLocales } from "expo-localization";
 import handlerLanguage from "../utils/language";
+import { setSettgReducer } from "../redux/settingsSlice";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,6 @@ const HomeScreen = () => {
   const language = locates[0].languageCode;
   const { location, error } = useLocate();
   const [dataCity, setDataCity] = useState(null);
-
 
   useEffect(() => {
     const getFavorites = async () => {
@@ -30,7 +30,18 @@ const HomeScreen = () => {
         console.log(error);
       }
     };
+    const getSettings = async () => {
+      try {
+        const settings = await AsyncStorage.getItem("@SettingsWeatherB");
+        if (settings !== null) {
+          dispatch(setSettgReducer(JSON.parse(settings)));
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
     getFavorites();
+    getSettings();
   }, []);
 
   useEffect(() => {
