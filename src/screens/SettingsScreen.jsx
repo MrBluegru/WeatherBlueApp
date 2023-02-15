@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateThemeReducer, updateUDSReducer } from "../redux/settingsSlice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { styles } from "../styles/settingsScreen.Styles";
-import { Appearance } from "react-native";
+import handlerLanguage from "../utils/language";
+import { language } from "../utils/currentLanguaje";
+import { colorScheme } from "../utils/currentTheme";
 
 const SettingsScreen = () => {
   const dispatch = useDispatch();
-  const colorScheme = Appearance.getColorScheme();
-
   const themeSelected = useSelector((state) => state.settings.settings.theme);
   const isUseDevice = useSelector(
     (state) => state.settings.settings.useDeviceSettings
@@ -48,25 +48,21 @@ const SettingsScreen = () => {
           : [styles.container, styles.backLight]
       }
     >
-      <View style={styles.separator} />
-
       <View style={styles.subTitle}>
         <Text style={isDarkTheme ? styles.textDark : styles.textLight}>
-          Theme
+          {handlerLanguage("theme", language)}
         </Text>
       </View>
-
-      <View style={styles.separator} />
 
       {!useDeviceSettings ? (
         <View style={styles.inputContainer}>
           <Button
-            title="light"
+            title={handlerLanguage("light", language)}
             onPress={() => setTheme("light")}
             color={theme === "light" ? "green" : null}
           />
           <Button
-            title="dark"
+            title={handlerLanguage("dark", language)}
             onPress={() => setTheme("dark")}
             color={theme === "dark" ? "green" : null}
           />
@@ -74,7 +70,7 @@ const SettingsScreen = () => {
       ) : null}
       <View style={styles.inputContainer}>
         <Text style={isDarkTheme ? styles.textDark : styles.textLight}>
-          Use device settings
+          {handlerLanguage("useDS", language)}
         </Text>
         <Switch
           trackColor={{ false: "#767577", true: "#81b0ff" }}

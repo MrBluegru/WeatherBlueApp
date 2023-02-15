@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import MaterialComunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { FontAwesome, AntDesign } from "@expo/vector-icons";
-import { getLocales } from "expo-localization";
+import { language } from "./src/utils/currentLanguaje";
 import handlerLanguage from "./src/utils/language";
 
 import HomeScreen from "./src/screens/HomeScreen";
@@ -11,8 +11,6 @@ import SearchScreen from "./src/screens/SearchScreen";
 import FavoritesScreen from "./src/screens/FavoritesScreen";
 import SettingsScreen from "./src/screens/SettingsScreen";
 
-const locates = getLocales();
-const language = locates[0].languageCode;
 const Tab = createBottomTabNavigator();
 
 const MyTabs = () => {
@@ -54,7 +52,7 @@ const MyTabs = () => {
             <FontAwesome name="star" color={color} size={30} />
           ),
           headerShown: true,
-          headerTitle: handlerLanguage("titleFav", language)
+          headerTitle: handlerLanguage("titleFav", language),
         }}
       />
       <Tab.Screen
@@ -66,7 +64,7 @@ const MyTabs = () => {
             <AntDesign name="setting" color={color} size={30} />
           ),
           headerShown: true,
-          headerTitle: handlerLanguage("titleSettg", language)
+          headerTitle: handlerLanguage("titleSettg", language),
         }}
       />
     </Tab.Navigator>

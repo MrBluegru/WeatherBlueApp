@@ -12,6 +12,10 @@ const language = {
     alertDeleteFav: "Are you sure to remove this city from your favourites?",
     cancel: "cancel",
     remove: "remove",
+    theme: "Theme",
+    light: "light",
+    dark: "dark",
+    useDS: "Use device settings",
   },
   es: {
     tab1: "Inicio",
@@ -26,12 +30,19 @@ const language = {
     alertDeleteFav: "¿Estás seguro de eliminar esta ciudad de tus favoritos?",
     cancel: "cancelar",
     remove: "eliminar",
+    theme: "Tema",
+    light: "claro",
+    dark: "oscuro",
+    useDS: "Usar configuración del dispositivo",
   },
 };
 
 const handlerLanguage = (type, lang) => {
-  lang !== "es" || lang !== "en" ? (lang = "en") : lang;
-  return language[lang][type];
+  if (lang === "es" || lang === "en") {
+    return language[lang][type];
+  } else {
+    return language.en[type];
+  }
 };
 
 export default handlerLanguage;
