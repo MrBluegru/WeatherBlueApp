@@ -30,6 +30,7 @@ const language = {
 };
 
 const handlerLanguage = (type, lang) => {
+  lang !== "es" || lang !== "en" ? (lang = "en") : lang;
   return language[lang][type];
 };
 
