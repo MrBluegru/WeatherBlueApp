@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, ScrollView } from "react-native";
 import { styles } from "../../styles/allDataCard.Styles";
 import degreesToCardinal from "../../utils/degreesToCardinal";
 import unixToTime from "../../utils/unixToTime";
@@ -12,7 +12,7 @@ import handlerLanguage from "../../utils/language";
 
 const AllDataCard = (props) => {
   const nA = handlerLanguage("na");
-  
+
   const map = () => {
     return (
       <MapView
