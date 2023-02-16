@@ -8,6 +8,7 @@ import mtsToKm from "../../utils/mtsToKm";
 import MapView from "react-native-maps";
 import colorByTemp from "../../utils/colorsTemp";
 import capitalizedWord from "../../utils/capitalizedWord";
+import handlerLanguage from "../../utils/language";
 
 const AllDataCard = (props) => {
   const map = () => {
@@ -29,7 +30,7 @@ const AllDataCard = (props) => {
       />
     );
   };
-  
+
   return (
     <View
       style={[
@@ -39,12 +40,22 @@ const AllDataCard = (props) => {
     >
       <View style={styles.childContainers}>
         <View>
-          <Text style={styles.title}>{props.name}, {props.country}</Text>
+          <Text style={styles.title}>
+            {props.name}, {props.country}
+          </Text>
           <Text>{capitalizedWord(props.weather)}</Text>
-          <Text>Current {props.temp}ºC</Text>
-          <Text>Feels Like {props.feelsLike}ºC</Text>
-          <Text>Humidity {props.humidity}%</Text>
-          <Text>Cloudiness {props.clouds}%</Text>
+          <Text>
+            {handlerLanguage("current")} {props.temp}ºC
+          </Text>
+          <Text>
+            {handlerLanguage("feelsLike")} {props.feelsLike}ºC
+          </Text>
+          <Text>
+            {handlerLanguage("humidity")} {props.humidity}%
+          </Text>
+          <Text>
+            {handlerLanguage("clouds")} {props.clouds}%
+          </Text>
         </View>
 
         <View>
@@ -59,11 +70,11 @@ const AllDataCard = (props) => {
 
       <View>
         <View style={styles.viewSubtitle}>
-          <Text style={styles.subTitle}>Temperature</Text>
+          <Text style={styles.subTitle}>{handlerLanguage("temperature")}</Text>
         </View>
         <View style={styles.childContainers}>
-          <Text>Minimal</Text>
-          <Text>Maximum</Text>
+          <Text>{handlerLanguage("minimal")}</Text>
+          <Text>{handlerLanguage("maximum")}</Text>
         </View>
         <View style={styles.childContainers}>
           <Text>{props.tempMin}ºC</Text>
@@ -73,12 +84,14 @@ const AllDataCard = (props) => {
 
       <View>
         <View style={styles.viewSubtitle}>
-          <Text style={styles.subTitle}>Atmospheric pressure</Text>
+          <Text style={styles.subTitle}>
+            {handlerLanguage("atmosphericTitle")}
+          </Text>
         </View>
         <View style={styles.childContainers}>
-          <Text>Above sea level</Text>
+          <Text>{handlerLanguage("aboveSeaL")}</Text>
           <Text>⬇</Text>
-          <Text>At ground level</Text>
+          <Text>{handlerLanguage("atGroundL")}</Text>
         </View>
         <View style={styles.childContainers}>
           <Text>{props.seaLevel} /hPa</Text>
@@ -89,12 +102,12 @@ const AllDataCard = (props) => {
 
       <View>
         <View style={styles.viewSubtitle}>
-          <Text style={styles.subTitle}>Wind</Text>
+          <Text style={styles.subTitle}>{handlerLanguage("wind")}</Text>
         </View>
         <View style={styles.childContainers}>
-          <Text>Visibility</Text>
-          <Text>Direction</Text>
-          <Text>Gusts</Text>
+          <Text>{handlerLanguage("visibility")}</Text>
+          <Text>{handlerLanguage("direction")}</Text>
+          <Text>{handlerLanguage("gusts")}</Text>
         </View>
         <View style={styles.childContainers}>
           <Text>{mtsToKm(props.visibility)}</Text>
@@ -104,13 +117,17 @@ const AllDataCard = (props) => {
       </View>
 
       <View style={styles.childContainers}>
-        <Text>Sunrise: {unixToTime(props.sunrise)}</Text>
-        <Text>Sunset: {unixToTime(props.sunset)}</Text>
+        <Text>
+          {handlerLanguage("sunrise")}: {unixToTime(props.sunrise)}
+        </Text>
+        <Text>
+          {handlerLanguage("sunset")}: {unixToTime(props.sunset)}
+        </Text>
       </View>
       <View style={styles.containerMap}>{props !== null ? map() : null}</View>
       <View style={styles.childContainers}>
         <Text style={styles.normalTextI}>
-          Last update {unixToTime(props.timeDataUnix)}
+          {handlerLanguage("lastUpdate")} {unixToTime(props.timeDataUnix)}
         </Text>
       </View>
     </View>

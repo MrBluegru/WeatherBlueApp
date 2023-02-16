@@ -1,10 +1,10 @@
 import { API_KEY } from "@env";
-import { language } from "./currentLanguaje";
+import { currentLanguage } from "./currentLanguaje";
 
 const searchCitiesByName = async (value) => {
   const name = value.trim();
   const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=${name},&appid=${API_KEY}&units=metric&lang=${language}`
+    `https://api.openweathermap.org/data/2.5/weather?q=${name},&appid=${API_KEY}&units=metric&lang=${currentLanguage}`
   );
   const data = await response.json();
   try {

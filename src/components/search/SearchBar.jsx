@@ -5,10 +5,6 @@ import searchCitiesByName from "../../utils/searchByName";
 import { useDispatch, useSelector } from "react-redux";
 import { addCitieReducer } from "../../redux/citiesSlice";
 import handlerLanguage from "../../utils/language";
-import { getLocales } from "expo-localization";
-
-const locates = getLocales();
-const language = locates[0].languageCode;
 
 const SearchBar = () => {
   const dispatch = useDispatch();
@@ -16,36 +12,43 @@ const SearchBar = () => {
   const [city, setCity] = useState("");
 
   const onSearch = async () => {
-    let itsEmpty = /^\s/g.test(city);
-    const newCitie = await searchCitiesByName(city);
+    let cityWithoutBlank = city.trim();
+    const newCitie = await searchCitiesByName(cityWithoutBlank);
 
-    if (city === "" || itsEmpty) {
+    if (city === "" || cityWithoutBlank === "") {
       Alert.alert("Wait", "I need a name to search");
     } else {
       const alreadyAdded = cities.filter((city) => city.id === newCitie.id);
 
       if (newCitie === "city not found") {
-        return Alert.alert("Wait", `${city} city not found`);
+        return Alert.alert(
+          `${handlerLanguage("wait")}`,
+          `${city} ${handlerLanguage("notFound")}`
+        );
       }
       if (!alreadyAdded.length) {
         dispatch(addCitieReducer(newCitie));
         setCity("");
       } else {
-        return Alert.alert("Wait", "City already added"), { cancelable: false };
+        return (
+          Alert.alert(
+            `${handlerLanguage("wait")}`,
+            `${handlerLanguage("cityAdded")}`
+          ),
+          { cancelable: true }
+        );
       }
     }
   };
 
   return (
-    <View style={cities.length ? styles.initialSearch : styles.lastISearch}>
-      <TextInput
-        value={city}
-        placeholder={handlerLanguage("placeHolderSearch", language)}
-        onChangeText={setCity}
-        onSubmitEditing={onSearch}
-        style={styles.textInput}
-      />
-    </View>
+    <TextInput
+      value={city}
+      placeholder={handlerLanguage("placeHolderSearch")}
+      onChangeText={setCity}
+      onSubmitEditing={onSearch}
+      style={styles.textInput}
+    />
   );
 };
 

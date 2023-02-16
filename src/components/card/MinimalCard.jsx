@@ -19,7 +19,6 @@ import unixToTime from "../../utils/unixToTime";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavReducer, deleteFavReducer } from "../../redux/favoritesSlice";
 import { deleteCitieReducer } from "../../redux/citiesSlice";
-import { getLocales } from "expo-localization";
 import handlerLanguage from "../../utils/language";
 
 const MinimalCard = (props) => {
@@ -29,39 +28,30 @@ const MinimalCard = (props) => {
   const listCities = useSelector((state) => state.favorites.favorites);
   const alreadyAdded = listCities.filter((c) => c.id === city.id);
 
-  const locates = getLocales();
-  const language = locates[0].languageCode;
-
   const handlerFavorites = async () => {
     const newCity = { id: city.id, name: city.name };
 
     if (alreadyAdded.length) {
-      Alert.alert(
-        handlerLanguage("wait", language),
-        handlerLanguage("alertDeleteFav", language),
-        [
-          {
-            text: handlerLanguage("cancel", language),
-            style: "cancel",
+      Alert.alert(handlerLanguage("wait"), handlerLanguage("alertDeleteFav"), [
+        {
+          text: handlerLanguage("cancel"),
+          style: "cancel",
+        },
+        {
+          text: handlerLanguage("remove"),
+          onPress: async () => {
+            try {
+              dispatch(deleteFavReducer(city.id));
+              await AsyncStorage.setItem(
+                "@FavoritesCities",
+                JSON.stringify(listCities.filter((city) => city.id !== city.id))
+              );
+            } catch (error) {
+              console.log(error);
+            }
           },
-          {
-            text: handlerLanguage("remove", language),
-            onPress: async () => {
-              try {
-                dispatch(deleteFavReducer(city.id));
-                await AsyncStorage.setItem(
-                  "@FavoritesCities",
-                  JSON.stringify(
-                    listCities.filter((city) => city.id !== city.id)
-                  )
-                );
-              } catch (error) {
-                console.log(error);
-              }
-            },
-          },
-        ]
-      );
+        },
+      ]);
     }
     if (!alreadyAdded.length) {
       try {
@@ -110,7 +100,7 @@ const MinimalCard = (props) => {
             <Button
               style={styles.button}
               onPress={() => setModalVisible(!modalVisible)}
-              title="Close"
+              title={handlerLanguage("close")}
             />
           </ScrollView>
         </View>
@@ -135,37 +125,32 @@ const MinimalCard = (props) => {
             {city.name}, {city.country} {city.temp} °C
           </Text>
           <Text>{capitalizedWord(city.weather)}</Text>
-          <Text>Clouds {city.clouds} %</Text>
-          <Text>Feels like {city.feelsLike} °C</Text>
-          <Text>Last update {unixToTime(city.timeDataUnix)}</Text>
+          <Text>
+            {handlerLanguage("clouds")} {city.clouds} %
+          </Text>
+          <Text>
+            {handlerLanguage("feelsLike")} {city.feelsLike} °C
+          </Text>
+          <Text>
+            {handlerLanguage("lastUpdate")} {unixToTime(city.timeDataUnix)}
+          </Text>
         </View>
 
         <View style={styles.btons}>
           <TouchableOpacity onPress={() => setModalVisible(true)}>
-            <Entypo
-              name="eye"
-              size={24}
-              color={"black"}
-              // style={styles.icons}
-            />
+            <Entypo name="eye" size={24} color={"black"} />
           </TouchableOpacity>
           <TouchableOpacity onPress={handlerFavorites}>
             <Entypo
               name="star"
               size={24}
               color={alreadyAdded.length ? "yellow" : "black"}
-              // style={styles.icons}
             />
           </TouchableOpacity>
 
           {btnDelete ? (
             <TouchableOpacity onPress={deleteCity}>
-              <MaterialIcons
-                name="delete-outline"
-                size={24}
-                color={"black"}
-                // style={styles.icons}
-              />
+              <MaterialIcons name="delete-outline" size={24} color={"black"} />
             </TouchableOpacity>
           ) : null}
         </View>

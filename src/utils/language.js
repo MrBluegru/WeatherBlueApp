@@ -1,3 +1,5 @@
+import { currentLanguage } from "./currentLanguaje";
+
 const language = {
   en: {
     tab1: "Home",
@@ -9,6 +11,8 @@ const language = {
     titleSettg: "Settings",
     errorLocate: "Turn on location and restart the app",
     wait: "Wait",
+    notFound: "city not found",
+    cityAdded: "City already added",
     alertDeleteFav: "Are you sure to remove this city from your favourites?",
     cancel: "cancel",
     remove: "remove",
@@ -16,6 +20,24 @@ const language = {
     light: "light",
     dark: "dark",
     useDS: "Use device settings",
+    close: "close",
+    clouds: "Cloudiness",
+    feelsLike: "Feels Like",
+    lastUpdate: "Last update",
+    current: "Current",
+    humidity: "Humidity",
+    temperature: "Temperature",
+    minimal: "Minimal",
+    maximum: "Maximum",
+    atmosphericTitle: "Atmospheric pressure",
+    aboveSeaL: "Above sea level",
+    atGroundL: "At ground level",
+    wind: "Wind",
+    visibility: "Visibility",
+    direction: "Direction",
+    gusts: "Gusts",
+    sunrise: "Sunrise",
+    sunset: "Sunset",
   },
   es: {
     tab1: "Inicio",
@@ -27,6 +49,8 @@ const language = {
     titleSettg: "Ajustes",
     errorLocate: "Active la ubicación y reinicie la aplicación",
     wait: "Espera",
+    notFound: "ciudad no encontrada",
+    cityAdded: "Ciudad ya agregada",
     alertDeleteFav: "¿Estás seguro de eliminar esta ciudad de tus favoritos?",
     cancel: "cancelar",
     remove: "eliminar",
@@ -34,14 +58,31 @@ const language = {
     light: "claro",
     dark: "oscuro",
     useDS: "Usar configuración del dispositivo",
+    close: "cerrar",
+    clouds: "Nubosidad",
+    feelsLike: "Sensación térmica",
+    lastUpdate: "Última actualización",
+    current: "Actual",
+    humidity: "Humedad",
+    temperature: "Temperatura",
+    minimal: "Mínima",
+    maximum: "Máxima",
+    atmosphericTitle: "Presión atmosférica",
+    aboveSeaL: "Sobre el nivel del mar",
+    atGroundL: "A nivel se suelo",
+    wind: "Viento",
+    visibility: "Visibilidad",
+    direction: "Dirección",
+    gusts: "Ráfagas",
+    sunrise: "Amanecer",
+    sunset: "Atardecer",
   },
 };
-
-const handlerLanguage = (type, lang) => {
-  if (lang === "es" || lang === "en") {
-    return language[lang][type];
+const handlerLanguage = (title) => {
+  if (currentLanguage === "es" || currentLanguage === "en") {
+    return language[currentLanguage][title];
   } else {
-    return language.en[type];
+    return language.en[title];
   }
 };
 
