@@ -4,32 +4,30 @@ export const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     justifyContent: "space-around",
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: "#000",
+    borderRadius: 2,
     marginVertical: 6,
     marginHorizontal: 10,
-    paddingVertical: 20
+    padding: 10,
   },
   icon: {
-    width: 100,
-    height: 100,
+    width: 80,
+    height: 80,
+  },
+  iconAndTemp: {
+    alignItems: "center",
   },
   title: {
-    marginVertical: 4,
-    fontSize: 15,
+    color: "#fff",
+    marginVertical: 10,
+    fontSize: 16,
     fontWeight: "bold",
   },
-  button: {
-    borderRadius: 4,
-    padding: 10,
-    elevation: 2,
+  text: {
+    color: "#fff",
   },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
-  },
-  buttonClose: {
-    backgroundColor: "#454d60",
+  containerTexts: {
+    margin: 5,
+    justifyContent: "space-around",
   },
   modalView: {
     flex: 1,
@@ -37,6 +35,15 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   btons: {
-    justifyContent: 'space-around'
+    justifyContent: "space-around",
+    margin: 8,
+  },
+  borderForDark: {
+    borderWidth: 0.6,
+    borderColor: "#fff",
+  },
+  borderForLight: {
+    borderWidth: 0.6,
+    borderColor: "#000",
   },
 });

@@ -9,7 +9,6 @@ const ListCities = () => {
     <View style={styles.container}>
       <FlatList
         data={cities}
-        ItemSeparatorComponent={() => <Text> </Text>}
         renderItem={({ item: city }) => (
           <MinimalCard city={city} btnDelete={true} />
         )}

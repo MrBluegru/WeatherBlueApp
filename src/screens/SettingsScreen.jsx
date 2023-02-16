@@ -7,7 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { styles } from "../styles/settingsScreen.Styles";
 import handlerLanguage from "../utils/language";
 import { language } from "../utils/currentLanguaje";
-import { colorScheme } from "../utils/currentTheme";
+import { useTheme } from "../hooks/useTheme";
 
 const SettingsScreen = () => {
   const dispatch = useDispatch();
@@ -21,8 +21,7 @@ const SettingsScreen = () => {
     isUseDevice === null ? false : isUseDevice
   );
 
-  const themeActive = isUseDevice ? colorScheme : themeSelected;
-  const isDarkTheme = themeActive === "dark";
+  const isDarkTheme = useTheme();
 
   useEffect(() => {
     const updateSettings = async () => {

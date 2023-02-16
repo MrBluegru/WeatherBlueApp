@@ -8,14 +8,11 @@ import AllDataCard from "../components/card/AllDataCard";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useDispatch } from "react-redux";
 import { setFavReducer } from "../redux/favoritesSlice";
-import { getLocales } from "expo-localization";
 import handlerLanguage from "../utils/language";
 import { setSettgReducer } from "../redux/settingsSlice";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
-  const locates = getLocales();
-  const language = locates[0].languageCode;
   const { location, error } = useLocate();
   const [dataCity, setDataCity] = useState(null);
 
@@ -66,7 +63,12 @@ const HomeScreen = () => {
             { backgroundColor: colorByTemp(dataCity.temp) },
           ]}
         >
-          <ScrollView>
+          <ScrollView
+            style={{ flex: 1 }}
+            contentContainerStyle={{ padding: 10 }}
+            alwaysBounceVertical={true}
+            showsVerticalScrollIndicator={false}
+          >
             <AllDataCard {...dataCity} />
           </ScrollView>
         </View>
@@ -78,7 +80,7 @@ const HomeScreen = () => {
           />
           <View>
             <Text style={styles.errorLocate}>
-              {handlerLanguage("errorLocate", language)}
+              {handlerLanguage("errorLocate")}
             </Text>
           </View>
         </View>
