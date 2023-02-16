@@ -38,6 +38,8 @@ const language = {
     gusts: "Gusts",
     sunrise: "Sunrise",
     sunset: "Sunset",
+    overall: "Overall",
+    na: "not available",
   },
   es: {
     tab1: "Inicio",
@@ -76,6 +78,8 @@ const language = {
     gusts: "Ráfagas",
     sunrise: "Amanecer",
     sunset: "Atardecer",
+    overall: "General",
+    na: "no disponible",
   },
 };
 const handlerLanguage = (title) => {
