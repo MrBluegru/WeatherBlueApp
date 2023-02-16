@@ -11,6 +11,8 @@ import capitalizedWord from "../../utils/capitalizedWord";
 import handlerLanguage from "../../utils/language";
 
 const AllDataCard = (props) => {
+  const nA = handlerLanguage("na");
+  
   const map = () => {
     return (
       <MapView
@@ -44,9 +46,7 @@ const AllDataCard = (props) => {
             {props.name}, {props.country}
           </Text>
           <Text>{capitalizedWord(props.weather)}</Text>
-          <Text>
-            {handlerLanguage("current")} {props.temp}ºC
-          </Text>
+
           <Text>
             {handlerLanguage("feelsLike")} {props.feelsLike}ºC
           </Text>
@@ -74,10 +74,12 @@ const AllDataCard = (props) => {
         </View>
         <View style={styles.childContainers}>
           <Text>{handlerLanguage("minimal")}</Text>
+          <Text>{handlerLanguage("current")}</Text>
           <Text>{handlerLanguage("maximum")}</Text>
         </View>
         <View style={styles.childContainers}>
           <Text>{props.tempMin}ºC</Text>
+          <Text>{props.temp}ºC</Text>
           <Text>{props.tempMax}ºC</Text>
         </View>
       </View>
@@ -90,13 +92,13 @@ const AllDataCard = (props) => {
         </View>
         <View style={styles.childContainers}>
           <Text>{handlerLanguage("aboveSeaL")}</Text>
-          <Text>⬇</Text>
+          <Text>{handlerLanguage("overall")}</Text>
           <Text>{handlerLanguage("atGroundL")}</Text>
         </View>
         <View style={styles.childContainers}>
-          <Text>{props.seaLevel} /hPa</Text>
-          <Text>{props.pressure} /hPa</Text>
-          <Text>{props.grndLevel} /hPa</Text>
+          <Text>{props.seaLevel ? `${props.seaLevel} /hPa` : nA} </Text>
+          <Text>{props.pressure ? `${props.pressure} /hPa` : nA} </Text>
+          <Text>{props.grndLevel ? `${props.grndLevel} /hPa` : nA} </Text>
         </View>
       </View>
 
