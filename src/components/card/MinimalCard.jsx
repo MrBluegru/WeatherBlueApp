@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addFavReducer, deleteFavReducer } from "../../redux/favoritesSlice";
 import { deleteCitieReducer } from "../../redux/citiesSlice";
 import handlerLanguage from "../../utils/language";
+import { useTheme } from "../../hooks/useTheme";
 
 const MinimalCard = (props) => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const MinimalCard = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const listCities = useSelector((state) => state.favorites.favorites);
   const alreadyAdded = listCities.filter((c) => c.id === city.id);
+  const isDarkTheme = useTheme();
 
   const handlerFavorites = async () => {
     const newCity = { id: city.id, name: city.name };
@@ -94,11 +96,10 @@ const MinimalCard = (props) => {
             style={{ flex: 1 }}
             contentContainerStyle={{ padding: 12 }}
             alwaysBounceVertical={true}
-            showsVerticalScrollIndicator={true}
+            showsVerticalScrollIndicator={false}
           >
             <AllDataCard {...city} />
             <Button
-              style={styles.button}
               onPress={() => setModalVisible(!modalVisible)}
               title={handlerLanguage("close")}
             />
@@ -111,34 +112,49 @@ const MinimalCard = (props) => {
   return (
     <>
       {modalViewCard()}
-      <View style={[styles.card, { backgroundColor: colorByTemp(city.temp) }]}>
-        <View>
+      <View
+        style={
+          isDarkTheme
+            ? [
+                styles.card,
+                styles.borderForDark,
+                { backgroundColor: colorByTemp(city.temp) },
+              ]
+            : [
+                styles.card,
+                styles.borderForLight,
+                { backgroundColor: colorByTemp(city.temp) },
+              ]
+        }
+      >
+        <View style={styles.iconAndTemp}>
           <Image
             style={styles.icon}
             source={{
               uri: `http://openweathermap.org/img/wn/${city.img}@4x.png`,
             }}
           />
+          <Text style={styles.title}>{city.temp} °C</Text>
         </View>
-        <View>
+        <View style={styles.containerTexts}>
           <Text style={styles.title}>
-            {city.name}, {city.country} {city.temp} °C
+            {city.name}, {city.country}
           </Text>
-          <Text>{capitalizedWord(city.weather)}</Text>
-          <Text>
-            {handlerLanguage("clouds")} {city.clouds} %
-          </Text>
-          <Text>
-            {handlerLanguage("feelsLike")} {city.feelsLike} °C
-          </Text>
-          <Text>
-            {handlerLanguage("lastUpdate")} {unixToTime(city.timeDataUnix)}
-          </Text>
+          <View>
+            <Text style={styles.text}>{capitalizedWord(city.weather)}</Text>
+
+            <Text style={styles.text}>
+              {handlerLanguage("feelsLike")} {city.feelsLike} °C
+            </Text>
+            <Text style={styles.text}>
+              {handlerLanguage("lastUpdate")} {unixToTime(city.timeDataUnix)}
+            </Text>
+          </View>
         </View>
 
         <View style={styles.btons}>
           <TouchableOpacity onPress={() => setModalVisible(true)}>
-            <Entypo name="eye" size={24} color={"black"} />
+            <Entypo name="eye" size={24} color={"white"} />
           </TouchableOpacity>
           <TouchableOpacity onPress={handlerFavorites}>
             <Entypo
@@ -150,7 +166,7 @@ const MinimalCard = (props) => {
 
           {btnDelete ? (
             <TouchableOpacity onPress={deleteCity}>
-              <MaterialIcons name="delete-outline" size={24} color={"black"} />
+              <MaterialIcons name="delete-outline" size={24} color={"red"} />
             </TouchableOpacity>
           ) : null}
         </View>
