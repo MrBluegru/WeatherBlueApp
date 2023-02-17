@@ -71,7 +71,7 @@ const language = {
     maximum: "Máxima",
     atmosphericTitle: "Presión atmosférica",
     aboveSeaL: "Sobre el nivel del mar",
-    atGroundL: "A nivel se suelo",
+    atGroundL: "A nivel del suelo",
     wind: "Viento",
     visibility: "Visibilidad",
     direction: "Dirección",
