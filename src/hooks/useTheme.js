@@ -1,8 +1,8 @@
 import { Appearance } from "react-native";
 import { useSelector } from "react-redux";
-const colorScheme = Appearance.getColorScheme();
 
 export function useTheme() {
+  const colorScheme = Appearance.getColorScheme();
   const { theme, useDeviceSettings } = useSelector(
     (state) => state.settings.settings
   );

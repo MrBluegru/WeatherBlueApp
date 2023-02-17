@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { View, TextInput, Alert } from "react-native";
-import { styles } from "../../styles/searchCities.Styles";
+import { TextInput, Alert } from "react-native";
 import searchCitiesByName from "../../utils/searchByName";
 import { useDispatch, useSelector } from "react-redux";
 import { addCitieReducer } from "../../redux/citiesSlice";
 import handlerLanguage from "../../utils/language";
+import { useTheme } from "../../hooks/useTheme";
+import { styles } from "../../styles/searchCities.Styles";
 
 const SearchBar = () => {
+  const isDarkTheme = useTheme();
   const dispatch = useDispatch();
   const cities = useSelector((state) => state.cities.cities);
   const [city, setCity] = useState("");
@@ -47,7 +49,12 @@ const SearchBar = () => {
       placeholder={handlerLanguage("placeHolderSearch")}
       onChangeText={setCity}
       onSubmitEditing={onSearch}
-      style={styles.textInput}
+      placeholderTextColor={isDarkTheme ? "grey" : null}
+      style={
+        isDarkTheme
+          ? [styles.textInput, styles.darkTheme, styles.borderFromDark]
+          : [styles.textInput, styles.lightTheme, styles.borderFromLight]
+      }
     />
   );
 };

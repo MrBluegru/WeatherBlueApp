@@ -2,15 +2,24 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   textInput: {
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: "#fff",
+    borderRadius: 2,
+    borderWidth: .5,
     paddingHorizontal: 20,
     paddingVertical: 10,
-    marginBotton: 10,
     marginVertical: 10,
-    marginHorizontal: 15,
-    backgroundColor: "white",
-    width: "94%",
+    marginHorizontal: 10,
+  },
+  darkTheme: {
+    backgroundColor: "#1b2932",
+    color: "#fff",
+  },
+  lightTheme: {
+    backgroundColor: "#fff",
+  },
+  borderFromDark: {
+    borderColor: "#fff",
+  },
+  borderFromLight: {
+    borderColor: "#000",
   },
 });

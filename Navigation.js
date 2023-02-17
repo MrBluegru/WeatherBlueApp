@@ -5,20 +5,42 @@ import MaterialComunityIcons from "react-native-vector-icons/MaterialCommunityIc
 import { FontAwesome, AntDesign } from "@expo/vector-icons";
 import { language } from "./src/utils/currentLanguaje";
 import handlerLanguage from "./src/utils/language";
+import { StatusBar } from "react-native";
 
 import HomeScreen from "./src/screens/HomeScreen";
 import SearchScreen from "./src/screens/SearchScreen";
 import FavoritesScreen from "./src/screens/FavoritesScreen";
 import SettingsScreen from "./src/screens/SettingsScreen";
+import { useTheme } from "./src/hooks/useTheme";
 
 const Tab = createBottomTabNavigator();
 
 const MyTabs = () => {
+  const isDarkTheme = useTheme();
+  const colorBackground = isDarkTheme ? "#1b2932" : "#f2f2f2";
+  const borderColor = isDarkTheme ? "#fff" : "#000";
+
   return (
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
-        tabBarActiveTintColor: "black",
+        headerStyle: {
+          backgroundColor: colorBackground,
+        },
+        headerBackgroundContainerStyle: {
+          borderBottomColor: borderColor,
+          borderBottomWidth: 0.3,
+        },
+        headerTitleStyle: [{ color: isDarkTheme ? "#fff" : "#000" }],
+        tabBarStyle: [
+          {
+            backgroundColor: colorBackground,
+            borderTopColor: borderColor,
+          },
+        ],
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: "#5998c0",
+        tabBarInactiveTintColor: isDarkTheme ? "#f2f2f2" : "#1b2932",
       }}
     >
       <Tab.Screen
@@ -72,8 +94,11 @@ const MyTabs = () => {
 };
 
 export default function Navigation() {
+  const isDarkTheme = useTheme();
+  const statusBarStyle = isDarkTheme ? "#1b2932" : "#5998c0";
   return (
     <NavigationContainer>
+      <StatusBar backgroundColor={statusBarStyle} />
       <MyTabs />
     </NavigationContainer>
   );
