@@ -17,4 +17,19 @@ export const styles = StyleSheet.create({
   textDark: {
     color: "#fff",
   },
+  containerNoFav: {
+    flex: 1,
+    justifyContent: "center",
+    alignItem: "center",
+    margin: "20%",
+  },
+  textMgs: {
+    fontSize: 16,
+    fontWeight: "bold",
+    fontStyle: "italic",
+    textAlign: "center",
+  },
+  containerLoading: {
+    margin: "20%",
+  },
 });

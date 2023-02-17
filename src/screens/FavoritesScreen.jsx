@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, Image } from "react-native";
 import { useSelector } from "react-redux";
 import MinimalCard from "../components/card/MinimalCard";
 import searchCitiesByName from "../utils/searchByName";
 import { useTheme } from "../hooks/useTheme";
 import { styles } from "../styles/favoriteScreen.Styles";
+import handlerLanguage from "../utils/language";
 
 const FavoritesScreen = () => {
   const listCities = useSelector((state) => state.favorites.favorites);
@@ -31,8 +32,18 @@ const FavoritesScreen = () => {
       }
     >
       {listCities.length < 1 ? (
-        <Text>No favorites for now</Text>
-      ) : (
+        <View style={styles.containerNoFav}>
+          <Text
+            style={
+              isDarkTheme
+                ? [styles.textMgs, styles.textDark]
+                : [styles.textMgs, styles.textLight]
+            }
+          >
+            {handlerLanguage("noFavoritesMsg")}
+          </Text>
+        </View>
+      ) : citiesData.length ? (
         <FlatList
           data={citiesData}
           renderItem={({ item: city }) => (
@@ -40,6 +51,27 @@ const FavoritesScreen = () => {
           )}
           showsVerticalScrollIndicator={false}
         />
+      ) : (
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <Image
+            source={require("../img/loading.gif")}
+            resizeMode="center"
+            style={{ height: 140, width: 130 }}
+          />
+          <View style={styles.containerLoading}>
+            <Text
+              style={
+                isDarkTheme
+                  ? [styles.textMgs, styles.textDark]
+                  : [styles.textMgs, styles.textLight]
+              }
+            >
+              {handlerLanguage("loadingMsg")}
+            </Text>
+          </View>
+        </View>
       )}
     </View>
   );

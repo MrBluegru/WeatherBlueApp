@@ -40,6 +40,9 @@ const language = {
     sunset: "Sunset",
     overall: "Overall",
     na: "not available",
+    noFavoritesMsg:
+      "No favorites for now, to add one go to 🔍 and search for a city, then tap ⭐",
+    loadingMsg: "We are updating the information of your favorite cities.",
   },
   es: {
     tab1: "Inicio",
@@ -80,6 +83,9 @@ const language = {
     sunset: "Atardecer",
     overall: "General",
     na: "no disponible",
+    noFavoritesMsg:
+      "No hay favoritos por ahora, para agregar uno, vaya a 🔍 y busque una ciudad, luego toque ⭐",
+    loadingMsg: "Estamos actualizando la información de tus ciudades favoritas.",
   },
 };
 const handlerLanguage = (title) => {
