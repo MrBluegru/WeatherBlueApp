@@ -6,27 +6,34 @@ export const styles = StyleSheet.create({
     alignItems: "stretch",
   },
   title: {
-    fontSize: 24,
+    fontSize: 19,
     fontWeight: "bold",
   },
-  childContainers: {
+  subContainer: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-around",
-    paddingBottom: 10,
-    paddingTop: 10,
-  },
-  viewSubtitle: {
     justifyContent: "center",
+    padding: 6,
+    backgroundColor: "#5998c0",
+    borderRadius: 4,
+    marginVertical: 6,
+  },
+  childContainer: {
+    flex: 1,
+    flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
+    padding: 10,
+    borderRadius: 4,
+    marginVertical: 6,
   },
   icon: {
     height: 120,
     width: 120,
   },
   subTitle: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "bold",
   },
   normalTextI: {
@@ -42,5 +49,17 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  darkThemeChildCont: {
+    backgroundColor: "#1b2932",
+  },
+  lightThemeChildCont: {
+    backgroundColor: "#fff",
+  },
+  darkText: {
+    color: "#fff",
+  },
+  lightText: {
+    color: "#000",
   },
 });

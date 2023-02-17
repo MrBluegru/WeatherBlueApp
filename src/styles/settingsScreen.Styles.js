@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   backLight: {
-    backgroundColor: "#fff",
+    backgroundColor: "#f2f2f2",
   },
   backDark: {
     backgroundColor: "#1b2932",

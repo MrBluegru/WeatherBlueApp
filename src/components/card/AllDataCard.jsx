@@ -9,9 +9,18 @@ import MapView from "react-native-maps";
 import colorByTemp from "../../utils/colorsTemp";
 import capitalizedWord from "../../utils/capitalizedWord";
 import handlerLanguage from "../../utils/language";
+import { useTheme } from "../../hooks/useTheme";
 
 const AllDataCard = (props) => {
   const nA = handlerLanguage("na");
+  const isDarkTheme = useTheme();
+  const handlerTheme = isDarkTheme
+    ? [styles.childContainer, styles.darkThemeChildCont]
+    : [styles.childContainer, styles.lightThemeChildCont];
+  const handlerSubtTextChild = isDarkTheme
+    ? [styles.subTitle, styles.darkText]
+    : [styles.subTitle, styles.lightText];
+  const handlerTextChild = isDarkTheme ? [styles.darkText] : [styles.lightText];
 
   const map = () => {
     return (
@@ -40,25 +49,31 @@ const AllDataCard = (props) => {
         { backgroundColor: colorByTemp(props.temp) },
       ]}
     >
-      <View style={styles.childContainers}>
+      <View style={handlerTheme}>
         <View>
-          <Text style={styles.title}>
+          <Text
+            style={
+              isDarkTheme
+                ? [styles.title, styles.darkText]
+                : [styles.title, styles.lightText]
+            }
+          >
             {props.name}, {props.country}
           </Text>
-          <Text>{capitalizedWord(props.weather)}</Text>
+          <Text style={handlerTextChild}>{capitalizedWord(props.weather)}</Text>
 
-          <Text>
-            {handlerLanguage("feelsLike")} {props.feelsLike}ºC
+          <Text style={handlerTextChild}>
+            {handlerLanguage("clouds")} {props.clouds}%
           </Text>
-          <Text>
+          <Text style={handlerTextChild}>
             {handlerLanguage("humidity")} {props.humidity}%
           </Text>
-          <Text>
-            {handlerLanguage("clouds")} {props.clouds}%
+          <Text style={handlerTextChild}>
+            {handlerLanguage("feelsLike")} {props.feelsLike}ºC
           </Text>
         </View>
 
-        <View>
+        <View style={{ position: "absolute", bottom: 1, right: 1 }}>
           <Image
             style={styles.icon}
             source={{
@@ -69,66 +84,87 @@ const AllDataCard = (props) => {
       </View>
 
       <View>
-        <View style={styles.viewSubtitle}>
-          <Text style={styles.subTitle}>{handlerLanguage("temperature")}</Text>
+        <View style={styles.subContainer}>
+          <Text style={handlerSubtTextChild}>
+            {handlerLanguage("temperature")}
+          </Text>
         </View>
-        <View style={styles.childContainers}>
-          <Text>{handlerLanguage("minimal")}</Text>
-          <Text>{handlerLanguage("current")}</Text>
-          <Text>{handlerLanguage("maximum")}</Text>
+        <View style={handlerTheme}>
+          <Text style={handlerSubtTextChild}>{handlerLanguage("minimal")}</Text>
+          <Text style={handlerSubtTextChild}>{handlerLanguage("current")}</Text>
+          <Text style={handlerSubtTextChild}>{handlerLanguage("maximum")}</Text>
         </View>
-        <View style={styles.childContainers}>
-          <Text>{props.tempMin}ºC</Text>
-          <Text>{props.temp}ºC</Text>
-          <Text>{props.tempMax}ºC</Text>
+        <View style={handlerTheme}>
+          <Text style={handlerTextChild}>{props.tempMin}ºC</Text>
+          <Text style={handlerTextChild}>{props.temp}ºC</Text>
+          <Text style={handlerTextChild}>{props.tempMax}ºC</Text>
         </View>
       </View>
 
       <View>
-        <View style={styles.viewSubtitle}>
-          <Text style={styles.subTitle}>
+        <View style={styles.subContainer}>
+          <Text style={handlerSubtTextChild}>
             {handlerLanguage("atmosphericTitle")}
           </Text>
         </View>
-        <View style={styles.childContainers}>
-          <Text>{handlerLanguage("aboveSeaL")}</Text>
-          <Text>{handlerLanguage("overall")}</Text>
-          <Text>{handlerLanguage("atGroundL")}</Text>
+        <View style={handlerTheme}>
+          <Text style={handlerSubtTextChild}>AMSL</Text>
+          <Text style={handlerSubtTextChild}>{handlerLanguage("overall")}</Text>
+          <Text style={handlerSubtTextChild}>AGL</Text>
         </View>
-        <View style={styles.childContainers}>
-          <Text>{props.seaLevel ? `${props.seaLevel} /hPa` : nA} </Text>
-          <Text>{props.pressure ? `${props.pressure} /hPa` : nA} </Text>
-          <Text>{props.grndLevel ? `${props.grndLevel} /hPa` : nA} </Text>
+        <View style={handlerTheme}>
+          <Text style={handlerTextChild}>
+            {props.seaLevel ? `${props.seaLevel} /hPa` : nA}{" "}
+          </Text>
+          <Text style={handlerTextChild}>
+            {props.pressure ? `${props.pressure} /hPa` : nA}{" "}
+          </Text>
+          <Text style={handlerTextChild}>
+            {props.grndLevel ? `${props.grndLevel} /hPa` : nA}{" "}
+          </Text>
         </View>
       </View>
 
       <View>
-        <View style={styles.viewSubtitle}>
-          <Text style={styles.subTitle}>{handlerLanguage("wind")}</Text>
+        <View style={styles.subContainer}>
+          <Text style={handlerSubtTextChild}>{handlerLanguage("wind")}</Text>
         </View>
-        <View style={styles.childContainers}>
-          <Text>{handlerLanguage("visibility")}</Text>
-          <Text>{handlerLanguage("direction")}</Text>
-          <Text>{handlerLanguage("gusts")}</Text>
+        <View style={handlerTheme}>
+          <Text style={handlerSubtTextChild}>
+            {handlerLanguage("visibility")}
+          </Text>
+          <Text style={handlerSubtTextChild}>
+            {handlerLanguage("direction")}
+          </Text>
+          <Text style={handlerSubtTextChild}>{handlerLanguage("gusts")}</Text>
         </View>
-        <View style={styles.childContainers}>
-          <Text>{mtsToKm(props.visibility)}</Text>
-          <Text>{degreesToCardinal(props.windDeg)}</Text>
-          <Text>{mpsToKph(props.windGust)}</Text>
+        <View style={handlerTheme}>
+          <Text style={handlerTextChild}>{mtsToKm(props.visibility)}</Text>
+          <Text style={handlerTextChild}>
+            {degreesToCardinal(props.windDeg)}
+          </Text>
+          <Text style={handlerTextChild}>{mpsToKph(props.windGust)}</Text>
         </View>
       </View>
 
-      <View style={styles.childContainers}>
-        <Text>
-          {handlerLanguage("sunrise")}: {unixToTime(props.sunrise)}
-        </Text>
-        <Text>
-          {handlerLanguage("sunset")}: {unixToTime(props.sunset)}
-        </Text>
+      <View>
+        <View style={handlerTheme}>
+          <Text style={handlerSubtTextChild}>{handlerLanguage("sunrise")}</Text>
+          <Text style={handlerSubtTextChild}>{handlerLanguage("sunset")}</Text>
+        </View>
+        <View style={handlerTheme}>
+          <Text style={handlerSubtTextChild}>
+            🌅 {unixToTime(props.sunrise)}
+          </Text>
+          <Text style={handlerSubtTextChild}>
+            {" "}
+            {unixToTime(props.sunset)} 🌇
+          </Text>
+        </View>
       </View>
       <View style={styles.containerMap}>{props !== null ? map() : null}</View>
-      <View style={styles.childContainers}>
-        <Text style={styles.normalTextI}>
+      <View style={[handlerTheme, { justifyContent: "center" }]}>
+        <Text style={handlerSubtTextChild}>
           {handlerLanguage("lastUpdate")} {unixToTime(props.timeDataUnix)}
         </Text>
       </View>

@@ -10,9 +10,11 @@ import { useDispatch } from "react-redux";
 import { setFavReducer } from "../redux/favoritesSlice";
 import handlerLanguage from "../utils/language";
 import { setSettgReducer } from "../redux/settingsSlice";
+import { useTheme } from "../hooks/useTheme";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
+  const isDarkTheme = useTheme();
   const { location, error } = useLocate();
   const [dataCity, setDataCity] = useState(null);
 
@@ -73,7 +75,13 @@ const HomeScreen = () => {
           </ScrollView>
         </View>
       ) : error ? (
-        <View style={styles.containerCenter}>
+        <View
+          style={
+            isDarkTheme
+              ? [styles.containerCenter, styles.darkTheme]
+              : [styles.containerCenter, styles.lightTheme]
+          }
+        >
           <Image
             source={require("../img/errorLocate.gif")}
             style={styles.iconError}
@@ -85,7 +93,7 @@ const HomeScreen = () => {
           </View>
         </View>
       ) : (
-        <View style={styles.containerCenter}>
+        <View style={[styles.containerCenter, { backgroundColor: "#fff" }]}>
           <Image style={styles.icon} source={require("../img/locate.gif")} />
         </View>
       )}

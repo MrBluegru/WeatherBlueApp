@@ -1,9 +1,16 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+  containerInitial: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  containerDefault: {
+    justifyContent: "center",
+  },
   textInput: {
     borderRadius: 2,
-    borderWidth: .5,
+    borderWidth: 0.5,
     paddingHorizontal: 20,
     paddingVertical: 10,
     marginVertical: 10,

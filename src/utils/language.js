@@ -9,7 +9,8 @@ const language = {
     placeHolderSearch: "🔍 Search city",
     titleFav: "Favorites Cities",
     titleSettg: "Settings",
-    errorLocate: "Turn on location and restart the app",
+    errorLocate:
+      "To see the information of the place where you are, activate the location and restart the application.",
     wait: "Wait",
     notFound: "city not found",
     cityAdded: "City already added",
@@ -52,7 +53,8 @@ const language = {
     placeHolderSearch: "🔍 Buscar ciudad",
     titleFav: "Ciudades Favoritas",
     titleSettg: "Ajustes",
-    errorLocate: "Active la ubicación y reinicie la aplicación",
+    errorLocate:
+      "Para ver la información del lugar donde te encuentras activa la ubicación y reinicia la aplicación.",
     wait: "Espera",
     notFound: "ciudad no encontrada",
     cityAdded: "Ciudad ya agregada",
@@ -85,7 +87,8 @@ const language = {
     na: "no disponible",
     noFavoritesMsg:
       "No hay favoritos por ahora, para agregar uno, vaya a 🔍 y busque una ciudad, luego toque ⭐",
-    loadingMsg: "Estamos actualizando la información de tus ciudades favoritas.",
+    loadingMsg:
+      "Estamos actualizando la información de tus ciudades favoritas.",
   },
 };
 const handlerLanguage = (title) => {

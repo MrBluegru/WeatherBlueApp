@@ -58,12 +58,12 @@ const SettingsScreen = () => {
           <Button
             title={handlerLanguage("light", language)}
             onPress={() => setTheme("light")}
-            color={theme === "light" ? "green" : null}
+            color={theme === "light" ? "#5998c0" : 'grey'}
           />
           <Button
             title={handlerLanguage("dark", language)}
             onPress={() => setTheme("dark")}
-            color={theme === "dark" ? "green" : null}
+            color={theme === "dark" ? "#5998c0" : 'grey'}
           />
         </View>
       ) : null}
@@ -72,8 +72,8 @@ const SettingsScreen = () => {
           {handlerLanguage("useDS", language)}
         </Text>
         <Switch
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={useDeviceSettings ? "#f5dd4b" : "#f4f3f4"}
+          trackColor={{ false: "red", true: "#1ed760" }}
+          thumbColor={useDeviceSettings ? "#fff" : "grey"}
           ios_backgroundColor="#3e3e3e"
           onValueChange={() =>
             setUseDeviceSettings((previousState) => !previousState)

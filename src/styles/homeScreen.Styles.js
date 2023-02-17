@@ -8,7 +8,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#ffffff",
   },
   icon: {
     resizeMode: "center",
@@ -21,5 +20,11 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 18,
     top: 40,
+  },
+  darkTheme: {
+    backgroundColor: "#1b2932",
+  },
+  lightTheme: {
+    backgroundColor: "#fff",
   },
 });

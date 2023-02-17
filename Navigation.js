@@ -17,7 +17,7 @@ const Tab = createBottomTabNavigator();
 
 const MyTabs = () => {
   const isDarkTheme = useTheme();
-  const colorBackground = isDarkTheme ? "#1b2932" : "#f2f2f2";
+  const colorBackground = isDarkTheme ? "#1b2932" : "#fff";
   const borderColor = isDarkTheme ? "#fff" : "#000";
 
   return (
@@ -36,6 +36,7 @@ const MyTabs = () => {
           {
             backgroundColor: colorBackground,
             borderTopColor: borderColor,
+            borderTopWidth: 0.3,
           },
         ],
         tabBarShowLabel: false,
