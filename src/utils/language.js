@@ -44,6 +44,8 @@ const language = {
     noFavoritesMsg:
       "No favorites for now, to add one go to 🔍 and search for a city, then tap ⭐",
     loadingMsg: "We are updating the information of your favorite cities.",
+    unauthorizedRequest: "Unauthorized request. Invalid API key",
+    errorNotName: "I need a name to search",
   },
   es: {
     tab1: "Inicio",
@@ -89,6 +91,8 @@ const language = {
       "No hay favoritos por ahora, para agregar uno, vaya a 🔍 y busque una ciudad, luego toque ⭐",
     loadingMsg:
       "Estamos actualizando la información de tus ciudades favoritas.",
+    unauthorizedRequest: "Solicitud no autorizada. Clave de API no válida",
+    errorNotName: "Necesito un nombre para buscar",
   },
 };
 const handlerLanguage = (title) => {

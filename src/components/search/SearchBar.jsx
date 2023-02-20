@@ -18,14 +18,16 @@ const SearchBar = () => {
     const newCitie = await searchCitiesByName(cityWithoutBlank);
 
     if (city === "" || cityWithoutBlank === "") {
-      Alert.alert("Wait", "I need a name to search");
+      Alert.alert(handlerLanguage("wait"), handlerLanguage("errorNotName"));
     } else {
       const alreadyAdded = cities.filter((city) => city.id === newCitie.id);
 
-      if (newCitie === "city not found") {
+      if (newCitie.cod) {
         return Alert.alert(
           `${handlerLanguage("wait")}`,
-          `${city} ${handlerLanguage("notFound")}`
+          newCitie.cod === 404
+            ? `${city} ${handlerLanguage(newCitie.message)}`
+            : `${handlerLanguage(newCitie.message)}`
         );
       }
       if (!alreadyAdded.length) {

@@ -17,6 +17,7 @@ const HomeScreen = () => {
   const isDarkTheme = useTheme();
   const { location, error } = useLocate();
   const [dataCity, setDataCity] = useState(null);
+  const [errorCity, setErrorCity] = useState(null);
 
   useEffect(() => {
     const getFavorites = async () => {
@@ -46,11 +47,11 @@ const HomeScreen = () => {
   useEffect(() => {
     if (location !== null) {
       const search = async () => {
-        const city = await searchCurrentCity(
+        const response = await searchCurrentCity(
           location.coords.latitude,
           location.coords.longitude
         );
-        setDataCity(city);
+        response.cod ? setErrorCity(response.message) : setDataCity(response);
       };
       search();
     }
@@ -94,7 +95,11 @@ const HomeScreen = () => {
         </View>
       ) : (
         <View style={[styles.containerCenter, { backgroundColor: "#fff" }]}>
-          <Image style={styles.icon} source={require("../img/locate.gif")} />
+          {errorCity !== null ? (
+            <Text style={{ color: "red" }}>{handlerLanguage(errorCity)}</Text>
+          ) : (
+            <Image style={styles.icon} source={require("../img/locate.gif")} />
+          )}
         </View>
       )}
     </>
