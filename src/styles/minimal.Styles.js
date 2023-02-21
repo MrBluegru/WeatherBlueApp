@@ -46,4 +46,9 @@ export const styles = StyleSheet.create({
     borderWidth: 0.6,
     borderColor: "#000",
   },
+  button: {
+    paddingHorizontal: "2%",
+    paddingBottom: "4%",
+    width: "100%",
+  },
 });

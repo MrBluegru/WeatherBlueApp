@@ -1,7 +1,6 @@
-import { API_KEY } from "@env";
 import { currentLanguage } from "./currentLanguaje";
 import processCitiesResponse from "./processCitiesRes";
-
+const { API_KEY } = process.env;
 
 const searchCurrentCity = async (lat, lon) => {
   try {

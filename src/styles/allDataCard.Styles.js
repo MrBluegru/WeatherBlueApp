@@ -1,9 +1,17 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+  containerInitial: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "2%",
+  },
   containerCenter: {
     flex: 1,
     alignItems: "stretch",
+    justifyContent: "center",
+    width: "100%",
   },
   title: {
     fontSize: 19,
@@ -20,7 +28,6 @@ export const styles = StyleSheet.create({
     marginVertical: 6,
   },
   childContainer: {
-    flex: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",

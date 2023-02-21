@@ -94,15 +94,16 @@ const MinimalCard = (props) => {
         >
           <ScrollView
             style={{ flex: 1 }}
-            contentContainerStyle={{ padding: 12 }}
             alwaysBounceVertical={true}
             showsVerticalScrollIndicator={false}
           >
             <AllDataCard {...city} />
-            <Button
-              onPress={() => setModalVisible(!modalVisible)}
-              title={handlerLanguage("close")}
-            />
+            <View style={styles.button}>
+              <Button
+                onPress={() => setModalVisible(!modalVisible)}
+                title={handlerLanguage("close")}
+              />
+            </View>
           </ScrollView>
         </View>
       </Modal>

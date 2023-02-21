@@ -34,6 +34,7 @@ const SearchBar = () => {
         dispatch(addCitieReducer(newCitie));
         setCity("");
       } else {
+        setCity("");
         return (
           Alert.alert(
             `${handlerLanguage("wait")}`,
