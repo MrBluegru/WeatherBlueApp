@@ -12,9 +12,11 @@
 
 1. Instalar las dependencias, ejecuta el comando `npm install`.
 
-2. Ejecutar el comando `npm start`.
+2. Crea en el directorio principal un archivo `.env` y agrega `API_KEY=tuApiKey` (si no tienes una puedes obtenerla en **<a href="[https://expo.dev/accounts/mrbluegru/projects/weatherBlue/builds/aeb493e2-3364-4426-8dda-b64acca24e7a](https://openweathermap.org/api)" target="_blank" rel="noreferrer">OpenWeather</a>** )
 
-3. Puedes usar un emulador mobile o tu dispositivo movil y descargar la app *Expo* para escanear el codigo QR que te mostrara por consola al completar el paso anterior.
+3. Ejecutar el comando `npm start`.
+
+4. Puedes usar un emulador mobile o tu dispositivo movil y descargar la app *Expo* para escanear el codigo QR que te mostrara por consola al completar el paso anterior.
 
 
 # Descargar instalador para Android
