@@ -12,7 +12,7 @@
 
 1. Instalar las dependencias, ejecuta el comando `npm install`.
 
-2. Crea en el directorio principal un archivo `.env` y agrega `API_KEY=tuApiKey` (si no tienes una puedes obtenerla en **<a href="[https://expo.dev/accounts/mrbluegru/projects/weatherBlue/builds/aeb493e2-3364-4426-8dda-b64acca24e7a](https://openweathermap.org/api)" target="_blank" rel="noreferrer">OpenWeather</a>** )
+2. Crea en el directorio principal un archivo `.env` y agrega `API_KEY=tuApiKey` (obtén una en **<a href="https://openweathermap.org/api" target="_blank" rel="noreferrer">OpenWeather</a>** )
 
 3. Ejecutar el comando `npm start`.
 
@@ -26,8 +26,8 @@ APK - **<a href="https://expo.dev/accounts/mrbluegru/projects/weatherBlue/builds
 
 ## Construido con:
 
-0. Expo
-1. React Native
-2. React Navigation
-3. React Redux
-4. Redux Toolkit
+- Expo
+- React Native
+- React Navigation
+- React Redux
+- Redux Toolkit
