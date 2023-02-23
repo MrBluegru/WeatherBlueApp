@@ -4,7 +4,7 @@
   <img height="250" src="./assets/icon.png" />
 </p>
 
-#### Es una aplicación movil para consultar el clima, muestra el clima de su ubicacion actual, puede consultar el clima de otras ciudades por medio del buscador, puede agregar dichas ciudades a favoritos, el tema de la aplicacion(dark o light) se puede elegir desde el apartado de configuracion, idiomas de la aplicacion(Español, e Ingles) detectados automaticamente.
+#### Es una aplicación movil para consultar el clima, muestra el clima de su ubicación actual, puede consultar el clima de otras ciudades por medio del buscador, puede agregar dichas ciudades a favoritos, el tema de la aplicación(dark o light) se puede elegir desde el apartado de configuración, idiomas de la aplicación(Español, e Inglés) detectados automáticamente.
 
 # Arrancar de manera local
 
