@@ -21,7 +21,7 @@
 
 # Descargar instalador para Android
 
-APK - **<a href="https://expo.dev/accounts/mrbluegru/projects/weatherBlue/builds/aeb493e2-3364-4426-8dda-b64acca24e7a" target="_blank" rel="noreferrer">weatherBlue</a>**
+APK - **<a href="https://drive.google.com/file/d/1-OQeluRKzssnYo1CRgD-Vo9WwMRPwytN/view?usp=sharing" target="_blank" rel="noreferrer">weatherBlue</a>**
 
 
 ## Construido con:
