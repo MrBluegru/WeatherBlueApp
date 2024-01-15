@@ -1,7 +1,7 @@
 # weatherBlue
 
-<p align="center">
-  <img height="250" src="./assets/icon.png" />
+<p align='center'>
+  <img src="./assets/weatherBlue.gif" height="600px"/>
 </p>
 
 #### Es una aplicación movil para consultar el clima, muestra el clima de su ubicación actual, puede consultar el clima de otras ciudades por medio del buscador, puede agregar dichas ciudades a favoritos, el tema de la aplicación(dark o light) se puede elegir desde el apartado de configuración, idiomas de la aplicación(Español, e Inglés) detectados automáticamente.
